@@ -49,8 +49,8 @@ public class CrearProducto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        btnCrearProducto = new javax.swing.JButton();
-        btnCancelProduct = new javax.swing.JButton();
+        btnCrearUsuario = new javax.swing.JButton();
+        btnCancelUser = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         txtExistencias = new javax.swing.JTextField();
@@ -62,7 +62,7 @@ public class CrearProducto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jLabel1.setText("CREAR UN NUEVO PRODUCTO");
+        jLabel1.setText("CREAR UN NUEVO USUARIO");
 
         txtCodigo.setToolTipText("INGRESE SU NOMBRE COMPLETO");
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -88,17 +88,17 @@ public class CrearProducto extends javax.swing.JFrame {
 
         jLabel5.setText("PRECIO DE VENTA");
 
-        btnCrearProducto.setText("CREAR");
-        btnCrearProducto.addActionListener(new java.awt.event.ActionListener() {
+        btnCrearUsuario.setText("CREAR");
+        btnCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearProductoActionPerformed(evt);
+                btnCrearUsuarioActionPerformed(evt);
             }
         });
 
-        btnCancelProduct.setText("CANCELAR");
-        btnCancelProduct.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelUser.setText("CANCELAR");
+        btnCancelUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelProductActionPerformed(evt);
+                btnCancelUserActionPerformed(evt);
             }
         });
 
@@ -124,12 +124,7 @@ public class CrearProducto extends javax.swing.JFrame {
 
         jLabel9.setText("EXISTENCIAS");
 
-        txtPrecioVenta.setToolTipText("INGRESE SU NOMBRE COMPLETO");
-        txtPrecioVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioVentaActionPerformed(evt);
-            }
-        });
+        txtPrecioVenta.setToolTipText("INGRESE SU USUARIO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,10 +134,10 @@ public class CrearProducto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCrearProducto))
+                        .addComponent(btnCrearUsuario))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(567, 567, 567)
-                        .addComponent(btnCancelProduct)
+                        .addComponent(btnCancelUser)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
@@ -171,7 +166,7 @@ public class CrearProducto extends javax.swing.JFrame {
                                 .addComponent(txtEstadoProducto, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtPrecioCompra, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPrecioVenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtPrecioVenta, javax.swing.GroupLayout.Alignment.LEADING)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -208,9 +203,9 @@ public class CrearProducto extends javax.swing.JFrame {
                     .addComponent(txtExistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(66, 66, 66)
-                .addComponent(btnCrearProducto)
+                .addComponent(btnCrearUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancelProduct)
+                .addComponent(btnCancelUser)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -225,7 +220,7 @@ public class CrearProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioCompraActionPerformed
 
-    private void btnCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearProductoActionPerformed
+    private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String FechaIngreso = dateFormat.format(Calendar.getInstance().getTime());
         String Codigo = txtCodigo.getText();
@@ -256,7 +251,7 @@ public class CrearProducto extends javax.swing.JFrame {
                     String.valueOf(Existencias)
             );
             Productos.Productos.add(ProductoTemp);
-            Productos.EscribirProductos();
+            Productos.EscribirProductos(true);
             JOptionPane.showMessageDialog(null, "Producto creado con exito");
             this.setVisible(false);
 
@@ -265,11 +260,11 @@ public class CrearProducto extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_btnCrearProductoActionPerformed
+    }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
-    private void btnCancelProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelProductActionPerformed
+    private void btnCancelUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelUserActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_btnCancelProductActionPerformed
+    }//GEN-LAST:event_btnCancelUserActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -278,10 +273,6 @@ public class CrearProducto extends javax.swing.JFrame {
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
-
-    private void txtPrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioVentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioVentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,8 +311,8 @@ public class CrearProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelProduct;
-    private javax.swing.JButton btnCrearProducto;
+    private javax.swing.JButton btnCancelUser;
+    private javax.swing.JButton btnCrearUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
