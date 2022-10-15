@@ -172,6 +172,7 @@ public class BorrarProducto extends javax.swing.JFrame {
                 } else {
                     ArchivoProductos.Productos.remove(i);
                     tabla.removeRow(jTable1.getSelectedRow());
+                    ArchivoProductos.EscribirProductos(false);
                     JOptionPane.showMessageDialog(null, "El producto ha sido Eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;

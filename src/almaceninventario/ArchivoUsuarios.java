@@ -14,7 +14,6 @@ import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import almaceninventario.Error;
 import java.text.DateFormat;
 import javax.swing.JOptionPane;
 
