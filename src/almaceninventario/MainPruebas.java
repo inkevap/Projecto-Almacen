@@ -25,10 +25,9 @@ public class MainPruebas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Probando Leer Usuarios
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String strDate = dateFormat.format(Calendar.getInstance().getTime());
-        System.out.println(strDate);
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
+        ArchivoProductos.LeerProductos();
+        System.out.println(ArchivoProductos.Productos.get(0).hashCode());
 
     }
 

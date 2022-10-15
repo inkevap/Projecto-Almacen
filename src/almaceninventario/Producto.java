@@ -11,22 +11,22 @@ public class Producto {
 
     String Codigo;
     String FechaIngreso;
-    int PrecioCompra;
+    String PrecioCompra;
     String EstadoProducto;
-    int PrecioVenta;
+    String PrecioVenta;
     String Nombre;
     String Descripcion;
-    int Existencias;
+    String Existencias;
 
     public Producto(
             String Codigo,
             String FechaIngreso,
-            int PrecioCompra,
+            String PrecioCompra,
             String EstadoProducto,
-            int PrecioVenta,
+            String PrecioVenta,
             String Nombre,
             String Descripcion,
-            int Existencias
+            String Existencias
             ) {
         this.Codigo = Codigo;
         this.FechaIngreso = FechaIngreso;
