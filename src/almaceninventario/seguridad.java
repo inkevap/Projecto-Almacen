@@ -12,7 +12,7 @@ class seguridad {
 
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).Us.equalsIgnoreCase(user) 
-                    && usuarios.get(i).PwdUsuario.equalsIgnoreCase(pwd) 
+                    && usuarios.get(i).PwdUsuario.equals(pwd) 
                     && usuarios.get(i).TipoUsuario.equalsIgnoreCase(Tipo) ) {
                 res = "Inicio De Sesion Correcto, Bienvenido " + user;
                 encontrado = true;
