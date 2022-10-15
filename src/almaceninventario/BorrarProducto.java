@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BorrarProducto extends javax.swing.JFrame {
 
-
     public BorrarProducto() {
         initComponents();
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
@@ -97,6 +96,7 @@ public class BorrarProducto extends javax.swing.JFrame {
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTable1FocusGained(evt);
@@ -156,8 +156,8 @@ public class BorrarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ModificarProducto ModificarProducto = new ModificarProducto();
-        ModificarProducto.setVisible(true);
+        GestionProductos GestionProductos = new GestionProductos();
+        GestionProductos.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -165,7 +165,19 @@ public class BorrarProducto extends javax.swing.JFrame {
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
         ArchivoProductos.LeerProductos();
-        tabla.removeRow(jTable1.getSelectedRow());
+        for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {
+            if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(jTable1.getSelectedRow(), 5))) {
+                if (Integer.parseInt(ArchivoProductos.Productos.get(i).Existencias) > 0) {
+                    JOptionPane.showMessageDialog(null, "El producto no se puede eliminar si tiene existencias", "Info", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    ArchivoProductos.Productos.remove(i);
+                    tabla.removeRow(jTable1.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "El producto ha sido Eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
+                }
+                break;
+            }
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
