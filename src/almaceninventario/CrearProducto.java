@@ -232,12 +232,12 @@ public class CrearProducto extends javax.swing.JFrame {
         int Existencias = Integer.parseInt(txtExistencias.getText());
 
         if (!Codigo.isEmpty()
-                && PrecioCompra > 0
+                && PrecioCompra > -1
                 && !EstadoProducto.isEmpty()
-                && PrecioVenta > 0
+                && PrecioVenta > -1
                 && !Nombre.isEmpty()
                 && !Descripcion.isEmpty()
-                && Existencias > 0) {
+                && Existencias > -1) {
 
             ArchivoProductos Productos = new ArchivoProductos("Productos.txt");
             Producto ProductoTemp = new Producto(
