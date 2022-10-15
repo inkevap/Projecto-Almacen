@@ -5,7 +5,7 @@
  */
 package almaceninventario;
 
-import almaceninventario.Archivo;
+import almaceninventario.ArchivoUsuarios;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -146,7 +146,7 @@ public class AccesoUsuarios extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         user = txtUsuario.getText();
         pwd = txtPwd.getText();
-        Archivo UsuarioDB = new Archivo("Usuarios.txt");
+        ArchivoUsuarios UsuarioDB = new ArchivoUsuarios("Usuarios.txt");
 
         try {
             UsuarioDB.LeerUsuarios();

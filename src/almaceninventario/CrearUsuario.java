@@ -206,7 +206,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                 && !PwdUser.isEmpty()
                 && !TipoUsuario.isEmpty()) {
             
-            Archivo Usuarios = new Archivo("Usuarios.txt");
+            ArchivoUsuarios Usuarios = new ArchivoUsuarios("Usuarios.txt");
             Usuario UsuarioTemp = new Usuario(
                     Nombre,
                     Apellido,

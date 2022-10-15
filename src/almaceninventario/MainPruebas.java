@@ -5,7 +5,7 @@
  */
 package almaceninventario;
 
-import almaceninventario.Archivo;
+import almaceninventario.ArchivoUsuarios;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
