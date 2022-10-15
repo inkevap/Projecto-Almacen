@@ -24,8 +24,9 @@ import java.util.Calendar;
  */
 public class CrearUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CrearUsuario
+    /*
+     * CrearUsuario funciona de igual manera que CrearProducto()
+     * verificar para comprender su funcionamiento a detalle.
      */
     public CrearUsuario() {
         initComponents();
@@ -192,8 +193,8 @@ public class CrearUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbTipoUsuarioActionPerformed
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String FechaCreacion = dateFormat.format(Calendar.getInstance().getTime());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");//lo unico que cambia en la clase usuarios
+        String FechaCreacion = dateFormat.format(Calendar.getInstance().getTime());//son los parametros que usamos
         String Nombre = txtNombre.getText();
         String Apellido = txtApellido.getText();
         String User = txtUser.getText();
@@ -213,7 +214,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                     User,
                     PwdUser,
                     TipoUsuario,
-                    FechaCreacion
+                    FechaCreacion //delo contrario el procedimiento es todo igual
             );
             Usuarios.Usuarios.add(UsuarioTemp);
             Usuarios.EscribirUsuarios();

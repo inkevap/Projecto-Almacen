@@ -112,19 +112,19 @@ public class ModificarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        GestionProductos GestionProductos = new GestionProductos();
+        GestionProductos GestionProductos = new GestionProductos();// para modificar el producto
         GestionProductos.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        BuscarNombre BuscarNombre = new BuscarNombre();
-        BuscarNombre.setVisible(true);
-        this.setVisible(false);
+        BuscarNombre BuscarNombre = new BuscarNombre();//podemos buscar el producto 
+        BuscarNombre.setVisible(true);//por nombre EN AMBOS CASOS LA PROGRAMACION ES LA MISMA
+        this.setVisible(false);//Lo que cambia es el valor que se busca igualar
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     BuscarCodigo BuscarCodigo = new BuscarCodigo();
+     BuscarCodigo BuscarCodigo = new BuscarCodigo();//o bien por codigo
         BuscarCodigo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed

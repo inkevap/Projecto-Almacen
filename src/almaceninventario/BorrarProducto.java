@@ -14,12 +14,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BorrarProducto extends javax.swing.JFrame {
 
-    public BorrarProducto() {
+    public BorrarProducto() {//Cuando se incia todos los modulos de la ventana
         initComponents();
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
-        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
-        ArchivoProductos.LeerProductos();
-        for (Producto producto : ArchivoProductos.Productos) {
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();//Tambien cargamos una referencia de la tabla
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");//abrimos el fichero de productos
+        ArchivoProductos.LeerProductos();// leemos y cargamos la informacion a memoria
+        for (Producto producto : ArchivoProductos.Productos) {//guardamos las caracteristicas de cada producto en una sola variable
 
             Object[] row = {producto.Nombre,
                 producto.Codigo,
@@ -29,8 +29,10 @@ public class BorrarProducto extends javax.swing.JFrame {
                 producto.FechaIngreso,
                 producto.PrecioCompra,
                 producto.PrecioVenta};
-            tabla.addRow(row);
+            tabla.addRow(row);//una vez que todas las caracteriticas estan guardadas
+            //estas se muestran en la tabla como una fila
 
+            /*Este proceso se repite con todos los productos que esten guardados en la basde de datos.*/
         }
 
     }
@@ -161,19 +163,25 @@ public class BorrarProducto extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /*Para eliminar un producto este NO TIENE QUE TENER EXISTENCIA DE LO CONTRARIO VA A MOSTRAR UNA ADVERTENCIA
+    el codigo a continuacion se enfoca en leer la fila que esta seleccioanda de los datos que se ejecutaron al iniciarse laventana
+    y eliminar lo tanto de memoria como de la base de datos como tal*/
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
-        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
-        ArchivoProductos.LeerProductos();
-        for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {
-            if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(jTable1.getSelectedRow(), 5))) {
-                if (Integer.parseInt(ArchivoProductos.Productos.get(i).Existencias) > 0) {
-                    JOptionPane.showMessageDialog(null, "El producto no se puede eliminar si tiene existencias", "Info", JOptionPane.INFORMATION_MESSAGE);
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();//se crea una referencia a la tabla
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");//se abre el fichero de los productos
+        ArchivoProductos.LeerProductos();//se lee la informacion de la misma 
+        for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {// aqui vamos comparando quien cumple con los datos de la fila seleccionada
+            if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(jTable1.getSelectedRow(), 5))) {//si la fecha de creacion es igual
+                if (Integer.parseInt(ArchivoProductos.Productos.get(i).Existencias) > 0) {//se verifica si tiene existencias antes de eliminar lo
+                    JOptionPane.showMessageDialog(null, "El producto no se puede eliminar si tiene existencias", "Info", JOptionPane.INFORMATION_MESSAGE);//si tiene existencias
+                    //no se va a poder eliminar por lo tanto va a mostrar una adevertencia
                 } else {
-                    ArchivoProductos.Productos.remove(i);
-                    tabla.removeRow(jTable1.getSelectedRow());
-                    ArchivoProductos.EscribirProductos(false);
-                    JOptionPane.showMessageDialog(null, "El producto ha sido Eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    ArchivoProductos.Productos.remove(i);//en el caso contrario de no tener existencias lo va a eliminar de la memoria
+                    tabla.removeRow(jTable1.getSelectedRow());// Luego lo elimina de la memoria
+                    ArchivoProductos.EscribirProductos(false);//y por ultimo lo borra del fichero
+                    /* En este caso el fichero esta guardando la informacion sin concatenar ya que esta guardando lo que leyo, y en caso de estar
+                    concatenando la informacion se duplicacaria en el fichero y en la memoria.*/
+                    JOptionPane.showMessageDialog(null, "El producto ha sido Eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);//se mostrara un aviso de que el producto ha sido eliminado
                 }
                 break;
             }

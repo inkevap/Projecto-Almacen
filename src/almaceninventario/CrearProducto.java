@@ -219,11 +219,11 @@ public class CrearProducto extends javax.swing.JFrame {
     private void txtPrecioCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioCompraActionPerformed
-
+      // La fecha tiene formato asignado, esto para que cuando tome la hora y fecha de hoy lo coloque en un formato agradable
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String FechaIngreso = dateFormat.format(Calendar.getInstance().getTime());
-        String Codigo = txtCodigo.getText();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");//definimos primero las variables que van
+        String FechaIngreso = dateFormat.format(Calendar.getInstance().getTime());// a contener
+        String Codigo = txtCodigo.getText();//la informacion para hacer un producto individual
         int PrecioCompra = Integer.parseInt(txtPrecioCompra.getText());
         String EstadoProducto = txtEstadoProducto.getText();
         int PrecioVenta = Integer.parseInt(txtPrecioVenta.getText());
@@ -231,17 +231,17 @@ public class CrearProducto extends javax.swing.JFrame {
         String Descripcion = txtDescripcion.getText();
         int Existencias = Integer.parseInt(txtExistencias.getText());
 
-        if (!Codigo.isEmpty()
-                && PrecioCompra > -1
+        if (!Codigo.isEmpty()// verificamos que las casillas tengan contenido 
+                && PrecioCompra > -1//para evitarnos errores
                 && !EstadoProducto.isEmpty()
                 && PrecioVenta > -1
                 && !Nombre.isEmpty()
                 && !Descripcion.isEmpty()
                 && Existencias > -1) {
 
-            ArchivoProductos Productos = new ArchivoProductos("Productos.txt");
-            Producto ProductoTemp = new Producto(
-                    Codigo,
+            ArchivoProductos Productos = new ArchivoProductos("Productos.txt");// Abrimos nuestra base de datos en fichero
+            Producto ProductoTemp = new Producto(//creamos el producto per se 
+                    Codigo,//agregamos todos los valores que previamente definimos
                     FechaIngreso,
                     String.valueOf(PrecioCompra),
                     EstadoProducto,
@@ -250,22 +250,23 @@ public class CrearProducto extends javax.swing.JFrame {
                     Descripcion,
                     String.valueOf(Existencias)
             );
-            Productos.Productos.add(ProductoTemp);
-            Productos.EscribirProductos(true);
-            JOptionPane.showMessageDialog(null, "Producto creado con exito");
+            Productos.Productos.add(ProductoTemp);//Agregamos el nuevo usuario a nuestra base de datos que previamente habiamos cargado
+            Productos.EscribirProductos(true);//Escribimos el nuevo producto con la opcion de cantenar la que ya teniamos, en este caso porque
+            JOptionPane.showMessageDialog(null, "Producto creado con exito");// no leemos lo que hay en el archivo antes de escribir la informacion
             this.setVisible(false);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios", "Error", JOptionPane.ERROR_MESSAGE);//En caso de que los campos esten
+            //vacios este muestra una alerta, asi como la alerta que se muestra cuando se tuve exito.
         }
 
 
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
     private void btnCancelUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelUserActionPerformed
-        this.setVisible(false);
+        this.setVisible(false);// cerramos la ventana actual ya que la ventana anterior no se cierra al
     }//GEN-LAST:event_btnCancelUserActionPerformed
-
+// abrir esta ventana
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
