@@ -60,7 +60,7 @@ public class Archivo {
     public void EscribirUsuarios() {
         try {
             PrintStream Archivo;
-            FileOutputStream temp = new FileOutputStream(Direccion, false);
+            FileOutputStream temp = new FileOutputStream(Direccion, true);
             Archivo = new PrintStream(temp);
             for (Usuario usuario : Usuarios) {
                 Archivo.println(usuario.Nombre);
