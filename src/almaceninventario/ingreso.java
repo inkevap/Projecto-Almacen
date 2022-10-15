@@ -20,7 +20,7 @@ public class ingreso extends javax.swing.JFrame {
      * Creates new form ingreso
      */
     public ingreso() {
-        initComponents();
+        initComponents();//Inicializamos todos los componentes
         
         
     }
@@ -107,9 +107,9 @@ public class ingreso extends javax.swing.JFrame {
 
     private void btnIngPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngPrincipalActionPerformed
         // TODO add your handling code here:
-        IngresoUsuarios IngUsuarios = new IngresoUsuarios();
-        IngUsuarios.setVisible(true);
-        this.setVisible(false);
+        IngresoUsuarios IngUsuarios = new IngresoUsuarios();//cuando presionamos el boton de ingresar
+        IngUsuarios.setVisible(true);//nos mueve a la siguiente ventana
+        this.setVisible(false);// y cierra la actual(la oculta)
         
     }//GEN-LAST:event_btnIngPrincipalActionPerformed
 
@@ -147,7 +147,7 @@ public class ingreso extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ingreso().setVisible(true);
+                new ingreso().setVisible(true);//Cuando se inicia la ventana se pone visible
             }
         });
     }

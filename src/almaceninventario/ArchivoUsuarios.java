@@ -17,8 +17,9 @@ import java.util.logging.Logger;
 import java.text.DateFormat;
 import javax.swing.JOptionPane;
 
-/**
- *
+/*
+ *Crear Usuario funciona de igual manera que ArchivoProductos()
+verificar la clas para tener mayor conocimiento de su funcionalidad a detalle
  */
 public class ArchivoUsuarios {
 
@@ -32,8 +33,8 @@ public class ArchivoUsuarios {
     public ArrayList<Usuario> LeerUsuarios() {
         Usuarios.clear();
         try {
-            Scanner scanner = new Scanner(new File(Direccion));
-            while (scanner.hasNextLine()) {
+            Scanner scanner = new Scanner(new File(Direccion));//lo unico que cambia son los parametros
+            while (scanner.hasNextLine()) {//los parametros aqui usado son los de usuarios
                 Usuario user = new Usuario(
                         scanner.nextLine(),//Nombre
                         scanner.nextLine(),//Apellido

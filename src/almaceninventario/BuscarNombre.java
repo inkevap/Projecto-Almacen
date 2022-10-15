@@ -180,31 +180,38 @@ public class BuscarNombre extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
-        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
-        ArchivoProductos.LeerProductos();
-        if (!txtBusqueda.getText().isEmpty()) {
-            if (tabla.getRowCount() > 0) {
-                while (tabla.getRowCount() > 0) {
-                    tabla.removeRow(0);
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();//cargamos la referencia de la tabla a la memoria
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");//cargamos los productos
+        ArchivoProductos.LeerProductos();// a la memoria, esto lee lo almacenado en el fichero
+        if (!txtBusqueda.getText().isEmpty()) {//Se verifica si el campo de busqueda no esta vacio
+            if (tabla.getRowCount() > 0) {//si no esta vacio procede a verificar si hay productos en la tabla
+                while (tabla.getRowCount() > 0) {//de ser asi limpia latabla antes de imprimir nueva informacion
+                    tabla.removeRow(0);//Elimmina la primera fila hasta que ya no hay mas filas
                 }
             }
-            for (Producto producto : ArchivoProductos.Productos) {
-                if (producto.Nombre.matches(txtBusqueda.getText())) {
-                    Object[] row = {producto.Nombre,
-                        producto.Codigo,
+            /*
+            El for que esta acontinuacion va comparando si los productos cumplen con el mismo nombre
+            de lo contrario son ignorados y por ende no son mostrados en la tabla.
+            TANTO ELIMINAR, COMO ACTUALIZAR YA SEA POR CODIGO O POR NOMBRE SE UTILIZA ESTE METODO PARA DESPLEGAR LAS FILAS
+            */
+            
+            for (Producto producto : ArchivoProductos.Productos) {//Una vez que la tabla se limpio
+                if (producto.Nombre.matches(txtBusqueda.getText())) {// se cargan los productos uno por uno
+                    Object[] row = {producto.Nombre,//y se almacena su informacion individual en una sola
+                        producto.Codigo,//variable la cual va a ser utilizada para agregar una fila a la tabla
                         producto.Descripcion,
                         producto.Existencias,
                         producto.EstadoProducto,
                         producto.FechaIngreso,
                         producto.PrecioCompra,
                         producto.PrecioVenta};
-                    tabla.addRow(row);
+                    tabla.addRow(row);//una vez creada la variabla se procede a agregar la fila a la tabla
 
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Tienes que colocar una palabra para buscar", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tienes que colocar una palabra para buscar", "Error", JOptionPane.ERROR_MESSAGE);//en caso de que no 
+            //haya ningun texto en la barra de busqueda se muestra un mensaje a tomar en consideracion.
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -213,38 +220,41 @@ public class BuscarNombre extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBusquedaActionPerformed
 
     private void btnLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTablaActionPerformed
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
-        if (tabla.getRowCount() > 0) {
-            while (tabla.getRowCount() > 0) {
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();//para limpiar la tabla con un boton se 
+        if (tabla.getRowCount() > 0) {//realiza el mismo procedimiento, mientras hayan filas en la tabla
+            while (tabla.getRowCount() > 0) {//se va a ir eliminando la primera hasta que no quede ninguna
                 tabla.removeRow(0);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "La tabla ya se encuentra limpia", "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La tabla ya se encuentra limpia", "Info", JOptionPane.INFORMATION_MESSAGE);//si se trata
+            //de limpiar la tabla cuando ya esta limpia esta mostrara un mensaje.
         }
     }//GEN-LAST:event_btnLimpiarTablaActionPerformed
 
     private void btnLimpiarTabla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTabla1ActionPerformed
-        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
-        ArchivoProductos.LeerProductos();
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
-        if (tabla.getRowCount() > 0) {
-            while (tabla.getRowCount() > 0) {
-                for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {
-                    if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(0, 5))) {
-                        ArchivoProductos.Productos.get(i).Nombre = (String)tabla.getValueAt(0,0);
-                        ArchivoProductos.Productos.get(i).Codigo = (String)tabla.getValueAt(0,1);
-                        ArchivoProductos.Productos.get(i).Descripcion = (String)tabla.getValueAt(0,2);
-                        ArchivoProductos.Productos.get(i).Existencias = (String)tabla.getValueAt(0,3);
-                        ArchivoProductos.Productos.get(i).EstadoProducto = (String)tabla.getValueAt(0,4);
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");// para guardar las modificaciones se abre el fichero 
+        ArchivoProductos.LeerProductos();//se carga en memoria toda su informacion
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();// se crea una referencia de la tabla
+        if (tabla.getRowCount() > 0) {//se verifica que haya filas
+            while (tabla.getRowCount() > 0) {//mientras haya filas disponibles
+                for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {//se va a buscar entre todos los productos 
+                    if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(0, 5))) {//al que coincida con
+                        ArchivoProductos.Productos.get(i).Nombre = (String)tabla.getValueAt(0,0);//la fecha de creacion,
+                        ArchivoProductos.Productos.get(i).Codigo = (String)tabla.getValueAt(0,1);//y de esta manera, se actualiza los datos en memoria
+                        ArchivoProductos.Productos.get(i).Descripcion = (String)tabla.getValueAt(0,2);//actualizamos la priemra fila
+                        ArchivoProductos.Productos.get(i).Existencias = (String)tabla.getValueAt(0,3);//y eso lo hacemos actualizando todas sus 
+                        ArchivoProductos.Productos.get(i).EstadoProducto = (String)tabla.getValueAt(0,4);//columnas al mismo tiempo
                         ArchivoProductos.Productos.get(i).PrecioCompra = (String)tabla.getValueAt(0,6);
                         ArchivoProductos.Productos.get(i).PrecioVenta = (String)tabla.getValueAt(0,7);
                     }
                 }
-                ArchivoProductos.EscribirProductos(false);
-                tabla.removeRow(0);
+                ArchivoProductos.EscribirProductos(false);//una vez todos los datos son actualizados se guarda en el fichero los 
+                //cambios que se hicieron en la memoria
+                tabla.removeRow(0);//se elimina la fila que recien acabamos de actualizar y se sigue buscando actualizar las siguientes filas
                 
             }
-            JOptionPane.showMessageDialog(null, "Los productos han sido actualizados", "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los productos han sido actualizados", "Info", JOptionPane.INFORMATION_MESSAGE);//una vez los datos han sido actualizados
+            //se informa mediante un mensaje que se ha logrado actualizar los datos de manera satisfactoria
         }
     }//GEN-LAST:event_btnLimpiarTabla1ActionPerformed
 

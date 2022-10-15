@@ -11,18 +11,18 @@ package almaceninventario;
  */
 public class IngresoUsuarios extends javax.swing.JFrame {
 
-    private String TipoUsuario = "nulo";
+    private String TipoUsuario = "nulo"; //creamos una variable que guarda si algun usuario esta logueado
 
     /**
      * Creates new form IngresoUsuarios
      */
-    public IngresoUsuarios() {
-        TipoUsuario = "nulo";
+    public IngresoUsuarios() {//en caso de que no se le pase ningun parametro al constructor
+        TipoUsuario = "nulo";// se asume que nadie esta logueado aun
         initComponents();
     }
 
-    public IngresoUsuarios(String TipoUsuario) {
-        this.TipoUsuario = TipoUsuario;
+    public IngresoUsuarios(String TipoUsuario) {// cuando se le pasa la 
+        this.TipoUsuario = TipoUsuario;//variable al constructor es porque hay alguien que ya se logueo
         initComponents();
     }
 
@@ -159,19 +159,25 @@ public class IngresoUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        if (TipoUsuario.equalsIgnoreCase("Administrador")) {
-            GestionProductos GestionProductos = new GestionProductos();
-            GestionProductos.setVisible(true);
-            this.setVisible(false);
-        } else {
-            AccesoUsuarios AccesoUsuarios = new AccesoUsuarios("Admin");
+        if (TipoUsuario.equalsIgnoreCase("Administrador")) {//cuando presionamos el boton de admin
+            GestionProductos GestionProductos = new GestionProductos();//se verifica si hay algun admin logueado
+            GestionProductos.setVisible(true);//de ser asi nos mueve al apartado de productos disponible solo
+            this.setVisible(false);//para los admins y luego oculta la ventana actual
+        } else {// pero en dado caso que no haya un admin logueado se procede a
+            AccesoUsuarios AccesoUsuarios = new AccesoUsuarios("Admin");//redirigir a la ventana de inicion de sesion de admin
+            /* Se le esta pasando un parametro a Accesousuario para
+            indicarle que cuando el usuario se haya logueado 
+            este sea enviado a la pagina del admin, la cual 
+            es la principal
+            dado que tiene permiso para todo*/
             AccesoUsuarios.setVisible(true);
-            this.setVisible(false);
+            this.setVisible(false);//y se oculta la ventana actual
         }
     }//GEN-LAST:event_btnAdminActionPerformed
-
+//Aqui se realiza lo mismo que en el anterior boton, verificamos si hay algun admin que este logueado
+    //de lo contrario mandamos al logueo de usuarios de ventas, este redirige directamente a ventas.
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
-        if (TipoUsuario.equalsIgnoreCase("Administrador")) {
+        if (TipoUsuario.equalsIgnoreCase("Administrador")) {//verificamos si hay algun admi
             GestionVentas GestionVentas = new GestionVentas();
             GestionVentas.setVisible(true);
             this.setVisible(false);
@@ -183,22 +189,22 @@ public class IngresoUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnSalirUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirUsuariosActionPerformed
-        ingreso Volver = new ingreso();
+        ingreso Volver = new ingreso();//boton de regreso a la ventana anterior
         Volver.setVisible(true);
-        this.setVisible(false);
+        this.setVisible(false);//ocultamos la ventana actual
 
     }//GEN-LAST:event_btnSalirUsuariosActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        MenuUsuarios Usuarios = new MenuUsuarios();
-        Usuarios.setVisible(true);
-        this.setVisible(false);
+        MenuUsuarios Usuarios = new MenuUsuarios();//la ventana usuarios donde
+        Usuarios.setVisible(true);//se gestiona usuarios
+        this.setVisible(false);//ocultamos la ventana actual.
 
 
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        if (TipoUsuario.equalsIgnoreCase("Administrador")){
+        if (TipoUsuario.equalsIgnoreCase("Administrador")){//el mismo proceso se aplica a Reportes y bodega
             GestionReportes GestionReportes = new GestionReportes();
             GestionReportes.setVisible(true);
             this.setVisible(false);
@@ -210,8 +216,8 @@ public class IngresoUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBodegaActionPerformed
-        if (TipoUsuario.equalsIgnoreCase("Administrador")) {
-            GestionBodega GestionBodega = new GestionBodega();
+        if (TipoUsuario.equalsIgnoreCase("Administrador")) {// si no hay usuario solicitar uno
+            GestionBodega GestionBodega = new GestionBodega();//al accesar te dirije al unico area autorizado
             GestionBodega.setVisible(true);
             this.setVisible(false);
         } else {

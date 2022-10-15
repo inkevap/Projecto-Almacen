@@ -13,7 +13,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Windows 10
  */
 public class BuscarCodigo extends javax.swing.JFrame {
-
+/*
+    ESTE CODIGO FUNCIONA EXACTAMENTE IGUAL A BUSCARNOMBRE CON LA UNICA DIFERENCIA DE QUE
+    AQUI SE ESTA BUSCANDO A LOS USUARIOS POR EL CODIGO Y NO POR EL NOMBRE
+    */
     private String UltimaBusqueda = "";
 
     public BuscarCodigo() {
@@ -190,7 +193,8 @@ public class BuscarCodigo extends javax.swing.JFrame {
                 }
             }
             for (Producto producto : ArchivoProductos.Productos) {
-                if (producto.Codigo.matches(txtBusqueda.getText())) {
+                if (producto.Codigo.matches(txtBusqueda.getText())) {// <<<<<<<------ ESTA ES LA UNICA LINEA QUE CAMBIA, CAMBIA DE HACER LA 
+                    //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
                     Object[] row = {producto.Nombre,
                         producto.Codigo,
                         producto.Descripcion,

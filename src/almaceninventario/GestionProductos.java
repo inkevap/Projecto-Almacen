@@ -134,26 +134,26 @@ public class GestionProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        IngresoUsuarios IngUsuarios = new IngresoUsuarios();
-        IngUsuarios.setVisible(true);
+        IngresoUsuarios IngUsuarios = new IngresoUsuarios();//cuando se presione el boton este va
+        IngUsuarios.setVisible(true);// hacia la ventana previa
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     ModificarProducto ModificarProducto = new ModificarProducto();
-     ModificarProducto.setVisible(true);
+     ModificarProducto ModificarProducto = new ModificarProducto();//nos dirije 
+     ModificarProducto.setVisible(true);//a la ventana para modificar productos
      this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    CrearProducto CrearProducto = new CrearProducto();
-    CrearProducto.setVisible(true);
+    CrearProducto CrearProducto = new CrearProducto();// nos dirije 
+    CrearProducto.setVisible(true);// a la ventana para crear un producto
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        BorrarProducto BorrarProducto = new BorrarProducto();
-        BorrarProducto.setVisible(true);
-        this.setVisible(false);
+        BorrarProducto BorrarProducto = new BorrarProducto();// nos dirije
+        BorrarProducto.setVisible(true);//a ala ventana para poder eliminar
+        this.setVisible(false);//un producto
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
