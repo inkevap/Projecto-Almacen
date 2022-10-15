@@ -6,6 +6,14 @@
 package almaceninventario;
 
 import almaceninventario.Archivo;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -18,24 +26,10 @@ public class MainPruebas {
      */
     public static void main(String[] args) {
         //Probando Leer Usuarios
-        Archivo DBuser = new Archivo("ArchivoPruebas.txt");
-        DBuser.LeerUsuarios();
-        if (DBuser.hayUsuarios()) {
-            for (Usuario user : DBuser.Usuarios) {
-                System.out.println(
-                        user.Nombre
-                        + user.Apellido
-                        + user.Us
-                        + user.PwdUsuario
-                        + user.TipoUsuario);
-            }
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(Calendar.getInstance().getTime());
+        System.out.println(strDate);
 
-        }
-        //Probando Escribir usuarios
-        Usuario Temp = new Usuario("Kevin", "Pocon", "Bpocon", "password", "Admin");
-        DBuser.Usuarios.remove(Temp);
-        DBuser.EscribirUsuarios();
-        
     }
 
 }

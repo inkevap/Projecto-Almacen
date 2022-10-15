@@ -10,8 +10,8 @@ package almaceninventario;
  * @author Windows 10
  */
 public class ingreso extends javax.swing.JFrame {
-    ingreso Ingreso = new ingreso();
-
+    //iniciado = false;
+    
     static void Setvisible(boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -19,13 +19,12 @@ public class ingreso extends javax.swing.JFrame {
     /**
      * Creates new form ingreso
      */
-    private ingreso() {
+    public ingreso() {
         initComponents();
+        
+        
     }
     
-    public ingreso Focus(){
-    return Ingreso;
-    }
     
 
     /**
@@ -39,8 +38,8 @@ public class ingreso extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnIngPrincipal = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,9 +54,6 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
-        jLabel2.setText("\"Mi pinturita bonita\"");
-
         btnSalir.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 12)); // NOI18N
         btnSalir.setText("X");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +61,10 @@ public class ingreso extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
+
+        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Mi pinturita bonita");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,15 +76,18 @@ public class ingreso extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(338, 338, 338)
-                        .addComponent(btnIngPrincipal))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(338, 338, 338)
+                                .addComponent(btnIngPrincipal))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(212, 212, 212)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 221, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(271, 271, 271)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(jLabel1)))
-                .addContainerGap(231, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,9 +95,9 @@ public class ingreso extends javax.swing.JFrame {
                 .addComponent(btnSalir)
                 .addGap(13, 13, 13)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(121, 121, 121)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel3)
+                .addGap(106, 106, 106)
                 .addComponent(btnIngPrincipal)
                 .addContainerGap(242, Short.MAX_VALUE))
         );
@@ -106,6 +109,8 @@ public class ingreso extends javax.swing.JFrame {
         // TODO add your handling code here:
         IngresoUsuarios IngUsuarios = new IngresoUsuarios();
         IngUsuarios.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_btnIngPrincipalActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -151,6 +156,6 @@ public class ingreso extends javax.swing.JFrame {
     private javax.swing.JButton btnIngPrincipal;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

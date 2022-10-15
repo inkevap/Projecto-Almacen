@@ -5,6 +5,9 @@
  */
 package almaceninventario;
 
+import java.text.DateFormat;
+
+
 
 public class Usuario {
         String Nombre;
@@ -12,23 +15,26 @@ public class Usuario {
         String Us;
         String PwdUsuario;
         String TipoUsuario;
-        
+        String FechaCreacion;
+
         public Usuario(
                 String Nombre,
                 String Apellido,
                 String Us,
                 String PwdUsuario,
-                String TipoUsuario
+                String TipoUsuario,
+                String FechaCreacion
                 ){
             this.Nombre = Nombre;
             this.Apellido = Apellido;
             this.Us = Us;
             this.PwdUsuario = PwdUsuario;
             this.TipoUsuario = TipoUsuario;
+            this.FechaCreacion = FechaCreacion;
         }
-        
+
         public Usuario(){}
-        
-        
-    
+
+
+
 }
