@@ -175,8 +175,8 @@ public class AccesoUsuarios extends javax.swing.JFrame {
                 case "Ventas":
                     if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Ventas")) {
                         intentos = 0;
-                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Ventas");
-                        IngresoUsuarios.setVisible(true);
+                        GestionVentas GestionVentas = new GestionVentas();
+                        GestionVentas.setVisible(true);
                         this.setVisible(false);
                         break;
                     } else {
@@ -187,8 +187,8 @@ public class AccesoUsuarios extends javax.swing.JFrame {
                 case "Reportes":
                     if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Reportes")) {
                         intentos = 0;
-                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Reportes");
-                        IngresoUsuarios.setVisible(true);
+                        GestionReportes GestionReportes = new GestionReportes();
+                        GestionReportes.setVisible(true);
                         this.setVisible(false);
                         break;
                     } else {
@@ -199,8 +199,8 @@ public class AccesoUsuarios extends javax.swing.JFrame {
                 case "Bodega":
                     if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Bodega")) {
                         intentos = 0;
-                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Bodega");
-                        IngresoUsuarios.setVisible(true);
+                        GestionBodega GestionBodega = new GestionBodega();
+                        GestionBodega.setVisible(true);
                         this.setVisible(false);
                         break;
                     } else {
