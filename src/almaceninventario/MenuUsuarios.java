@@ -40,7 +40,7 @@ public class MenuUsuarios extends javax.swing.JFrame {
         jLabel1.setText("INVENTARIO DEL ALMACEN");
 
         jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
-        jLabel2.setText("\"Mi pinturita bonita\"");
+        jLabel2.setText("Mi pinturita bonita");
 
         jLabel3.setText("MENU USUARIOS");
 

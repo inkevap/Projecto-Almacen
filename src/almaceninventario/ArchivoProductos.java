@@ -56,13 +56,13 @@ public class ArchivoProductos {
         return (Productos.size() == 0) ? false : true;
     }
 
-    public void EscribirProductos() {
+    public void EscribirProductos(Boolean Anidar) {
         try {
             PrintStream Archivo;
-            FileOutputStream temp = new FileOutputStream(Direccion, true);
+            FileOutputStream temp = new FileOutputStream(Direccion, Anidar);
             Archivo = new PrintStream(temp);
             for (Producto producto : Productos) {
-                Archivo.println(producto.Nombre);
+                Archivo.println(producto.Codigo);
                 Archivo.println(producto.FechaIngreso);
                 Archivo.println(producto.PrecioCompra);
                 Archivo.println(producto.EstadoProducto);
@@ -79,5 +79,5 @@ public class ArchivoProductos {
         }
         LeerProductos();
     }
-
+    
 }
