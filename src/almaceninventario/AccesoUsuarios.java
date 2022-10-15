@@ -6,17 +6,28 @@
 package almaceninventario;
 
 import almaceninventario.Archivo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Windows 10
  */
 public class AccesoUsuarios extends javax.swing.JFrame {
-    private static int intentos;
+
+    private static int intentos = 1;
     private static String user, pwd;
-    
-    
-    public AccesoUsuarios() {
+    private String Ventana = "";
+
+    private AccesoUsuarios() {
         initComponents();
+    }
+
+    public AccesoUsuarios(String Ventana) {
+        this.Ventana = Ventana;
+        initComponents();
+        jLabel2.setText("Inicio de sesion " + this.Ventana);
     }
 
     /**
@@ -30,7 +41,6 @@ public class AccesoUsuarios extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtPwd = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
@@ -44,9 +54,13 @@ public class AccesoUsuarios extends javax.swing.JFrame {
         jLabel1.setText("INVENTARIO DEL ALMACEN");
 
         jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
-        jLabel2.setText("\"Mi pinturita bonita\"");
-
-        jLabel3.setText("INICIO DE SESIÒN");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Inicio de sesion");
+        jLabel2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jLabel2PropertyChange(evt);
+            }
+        });
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,30 +91,28 @@ public class AccesoUsuarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(231, Short.MAX_VALUE)
+                .addGap(231, 231, 231)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPwd)
+                                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnCancelar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnIngresar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtPwd)
-                                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnIngresar)
+                                .addGap(92, 92, 92)))))
                 .addGap(212, 212, 212))
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +121,7 @@ public class AccesoUsuarios extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(80, 80, 80)
-                .addComponent(jLabel3)
-                .addGap(56, 56, 56)
+                .addGap(150, 150, 150)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -134,27 +144,90 @@ public class AccesoUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        
-        Archivo UsuarioDB = new Archivo("ArchivoPruebas.txt");
-        UsuarioDB.LeerUsuarios();
-        
-        
-        intentos++;
-            user = txtUsuario.getText();
-            pwd = txtPwd.getText();
-            //TODO Agregar fecha de creacion a usuario
+        user = txtUsuario.getText();
+        pwd = txtPwd.getText();
+        Archivo UsuarioDB = new Archivo("Usuarios.txt");
+
+        try {
+            UsuarioDB.LeerUsuarios();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "La base de datos esta dañada o esta vacia, por "
+                    + "favor cree un usuario administrado para iniciar sesion",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (!user.isEmpty() && !pwd.isEmpty()) {
             seguridad s = new seguridad();
-            s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos);
-            
+            switch (Ventana) {
+                case "Admin":
+                    if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Administrador")) {
+                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Administrador");
+                        IngresoUsuarios.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    } else {
+                        intentos++;
+                        JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "Ventas":
+                    if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Ventas")) {
+                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Ventas");
+                        IngresoUsuarios.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    } else {
+                        intentos++;
+                        JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "Reportes":
+                    if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Reportes")) {
+                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Reportes");
+                        IngresoUsuarios.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    } else {
+                        intentos++;
+                        JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "Bodega":
+                    if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Bodega")) {
+                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Bodega");
+                        IngresoUsuarios.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    } else {
+                        intentos++;
+                        JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+            }
+
+//            Ventas
+//Reportes
+//Bodega
+        } else {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        //TODO Agregar fecha de creacion a usuario
+
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         // TODO add your handling code here:}
-        
         IngresoUsuarios IgU = new IngresoUsuarios();
         IgU.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jLabel2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLabel2PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2PropertyChange
 
     /**
      * @param args the command line arguments
@@ -170,16 +243,24 @@ public class AccesoUsuarios extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AccesoUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AccesoUsuarios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AccesoUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AccesoUsuarios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AccesoUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AccesoUsuarios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AccesoUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AccesoUsuarios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -196,7 +277,6 @@ public class AccesoUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField txtPwd;

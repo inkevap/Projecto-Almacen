@@ -11,10 +11,18 @@ package almaceninventario;
  */
 public class IngresoUsuarios extends javax.swing.JFrame {
 
+    private String TipoUsuario = "nulo";
+
     /**
      * Creates new form IngresoUsuarios
      */
     public IngresoUsuarios() {
+        TipoUsuario = "nulo";
+        initComponents();
+    }
+
+    public IngresoUsuarios(String TipoUsuario) {
+        this.TipoUsuario = TipoUsuario;
         initComponents();
     }
 
@@ -44,7 +52,8 @@ public class IngresoUsuarios extends javax.swing.JFrame {
         jLabel1.setText("INVENTARIO DEL ALMACEN");
 
         jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
-        jLabel2.setText("\"Mi pinturita bonita\"");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Mi pinturita bonita");
 
         jLabel3.setText("SELECCIONE EL TIPO DE USUARIO");
 
@@ -63,8 +72,18 @@ public class IngresoUsuarios extends javax.swing.JFrame {
         });
 
         btnBodega.setText("BODEGA");
+        btnBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBodegaActionPerformed(evt);
+            }
+        });
 
         btnReportes.setText("REPORTES");
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
 
         btnUsuarios.setText("USUARIOS");
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -84,18 +103,6 @@ public class IngresoUsuarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 231, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSalirUsuarios)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(212, 212, 212))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(278, 278, 278))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,11 +117,20 @@ public class IngresoUsuarios extends javax.swing.JFrame {
                         .addComponent(btnReportes)
                         .addGap(76, 76, 76)
                         .addComponent(btnUsuarios)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(311, 311, 311))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSalirUsuarios)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(212, 212, 212))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(311, 311, 311))))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,25 +159,49 @@ public class IngresoUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // TODO add your handling code here:
+        if (TipoUsuario.equalsIgnoreCase("Administrador")) {
+            GestionProductos GestionProductos = new GestionProductos();
+            GestionProductos.setVisible(true);
+            this.setVisible(false);
+        } else {
+            AccesoUsuarios AccesoUsuarios = new AccesoUsuarios("Admin");
+            AccesoUsuarios.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnAdminActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
-        // TODO add your handling code here:
+        AccesoUsuarios AccesoUsuarios = new AccesoUsuarios("Ventas");
+        AccesoUsuarios.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnSalirUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirUsuariosActionPerformed
         ingreso Volver = new ingreso();
         Volver.setVisible(true);
-        
+        this.setVisible(false);
+
     }//GEN-LAST:event_btnSalirUsuariosActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         MenuUsuarios Usuarios = new MenuUsuarios();
         Usuarios.setVisible(true);
-        
-        
+        this.setVisible(false);
+
+
     }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        AccesoUsuarios AccesoUsuarios = new AccesoUsuarios("Reportes");
+        AccesoUsuarios.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBodegaActionPerformed
+        AccesoUsuarios AccesoUsuarios = new AccesoUsuarios("Bodega");
+        AccesoUsuarios.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBodegaActionPerformed
 
     /**
      * @param args the command line arguments
