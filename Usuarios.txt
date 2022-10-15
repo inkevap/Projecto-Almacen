@@ -10,3 +10,27 @@ Pkevin
 password
 Ventas
 2022-25-15 05:25:38
+reportes
+reportes
+reportes
+reportes
+Reportes
+2022-41-15 05:41:37
+Bodega
+Bodega
+Bodega
+Bodega
+Bodega
+2022-41-15 05:41:49
+Ventas
+Ventas
+Ventas
+Ventas
+Ventas
+2022-42-15 05:42:02
+Admin
+Admin
+Admin
+Admin
+Administrador
+2022-42-15 05:42:13

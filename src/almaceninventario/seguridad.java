@@ -24,7 +24,7 @@ class seguridad {
                 res = "clave y/o usuario inconrrecto con" + intentos + "intentos fallidos";
                 JOptionPane.showMessageDialog(null, res, "inicio de sesion", JOptionPane.ERROR_MESSAGE);
             }
-            if (intentos == 3) {
+            if (intentos == 2) {
                 JOptionPane.showMessageDialog(null, "3 INTENTOS FALLIDOS, SE CERRARA EL SISTEMA", "INICIO DE SESION", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
                 break;
