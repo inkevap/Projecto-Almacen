@@ -21,12 +21,12 @@ import javax.swing.JOptionPane;
 /**
  *
  */
-public class Archivo {
+public class ArchivoUsuarios {
 
     public ArrayList<Usuario> Usuarios = new ArrayList();
     private String Direccion;
 
-    public Archivo(String Direccion) {
+    public ArchivoUsuarios(String Direccion) {
         this.Direccion = Direccion;
     }
 
@@ -47,7 +47,7 @@ public class Archivo {
             }
             scanner.close();
         } catch (Exception e) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArchivoUsuarios.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(null,"La base de datos se encuentra dañada o esta vacia","Error",JOptionPane.ERROR_MESSAGE);
         }
         return Usuarios;
@@ -73,7 +73,7 @@ public class Archivo {
             Archivo.flush();
             Archivo.close();
         } catch (FileNotFoundException e) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArchivoUsuarios.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(null,"Hubo un Error al tratar de crear el usuario","Error",JOptionPane.ERROR_MESSAGE);
         }
         LeerUsuarios();
