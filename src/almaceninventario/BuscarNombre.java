@@ -14,10 +14,35 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BuscarNombre extends javax.swing.JFrame {
 
+    /*
+    ESTE CODIGO FUNCIONA EXACTAMENTE IGUAL A BUSCARNOMBRE CON LA UNICA DIFERENCIA DE QUE
+    AQUI SE ESTA BUSCANDO A LOS USUARIOS POR EL CODIGO Y NO POR EL NOMBRE
+     */
     private String UltimaBusqueda = "";
 
     public BuscarNombre() {
         initComponents();
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
+        ArchivoProductos.LeerProductos();
+        if (tabla.getRowCount() > 0) {
+            while (tabla.getRowCount() > 0) {
+                tabla.removeRow(0);
+            }
+        }
+        for (Producto producto : ArchivoProductos.Productos) {
+            //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
+            Object[] row = {producto.Nombre,
+                producto.Codigo,
+                producto.Descripcion,
+                producto.Existencias,
+                producto.EstadoProducto,
+                producto.FechaIngreso,
+                producto.PrecioCompra,
+                producto.PrecioVenta,
+            producto.FechaUltimaMod};
+            tabla.addRow(row);
+        }
 
     }
 
@@ -80,18 +105,33 @@ public class BuscarNombre extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Codigo", "Descripcion", "Existencias", "Estado del Producto", "Fecha de Ingreso", "Precio de Compra", "Precio de venta"
+                "Nombre", "Codigo", "Descripcion", "Existencias", "Estado del Producto", "Fecha de Ingreso", "Precio de Compra", "Precio de venta", "Ultima Modificacion"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false, true, true
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTable1InputMethodTextChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setHeaderValue("Nombre");
@@ -126,8 +166,8 @@ public class BuscarNombre extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(249, 249, 249)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 242, Short.MAX_VALUE)))
+                        .addComponent(txtBusqueda)
+                        .addGap(242, 242, 242)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -139,12 +179,12 @@ public class BuscarNombre extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(btnLimpiarTabla)
+                .addComponent(btnLimpiarTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(42, 42, 42)
-                .addComponent(jButton2)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(48, 48, 48)
-                .addComponent(btnLimpiarTabla1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnLimpiarTabla1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,38 +220,50 @@ public class BuscarNombre extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();//cargamos la referencia de la tabla a la memoria
-        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");//cargamos los productos
-        ArchivoProductos.LeerProductos();// a la memoria, esto lee lo almacenado en el fichero
-        if (!txtBusqueda.getText().isEmpty()) {//Se verifica si el campo de busqueda no esta vacio
-            if (tabla.getRowCount() > 0) {//si no esta vacio procede a verificar si hay productos en la tabla
-                while (tabla.getRowCount() > 0) {//de ser asi limpia latabla antes de imprimir nueva informacion
-                    tabla.removeRow(0);//Elimmina la primera fila hasta que ya no hay mas filas
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
+        ArchivoProductos.LeerProductos();
+        if (!txtBusqueda.getText().isEmpty()) {
+            if (tabla.getRowCount() > 0) {
+                while (tabla.getRowCount() > 0) {
+                    tabla.removeRow(0);
                 }
             }
-            /*
-            El for que esta acontinuacion va comparando si los productos cumplen con el mismo nombre
-            de lo contrario son ignorados y por ende no son mostrados en la tabla.
-            TANTO ELIMINAR, COMO ACTUALIZAR YA SEA POR CODIGO O POR NOMBRE SE UTILIZA ESTE METODO PARA DESPLEGAR LAS FILAS
-            */
-            
-            for (Producto producto : ArchivoProductos.Productos) {//Una vez que la tabla se limpio
-                if (producto.Nombre.matches(txtBusqueda.getText())) {// se cargan los productos uno por uno
-                    Object[] row = {producto.Nombre,//y se almacena su informacion individual en una sola
-                        producto.Codigo,//variable la cual va a ser utilizada para agregar una fila a la tabla
+            for (Producto producto : ArchivoProductos.Productos) {
+                if (producto.Nombre.toLowerCase().contains(txtBusqueda.getText().toLowerCase())) {// <<<<<<<------ ESTA ES LA UNICA LINEA QUE CAMBIA, CAMBIA DE HACER LA 
+                    //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
+                    Object[] row = {producto.Nombre,
+                        producto.Codigo,
                         producto.Descripcion,
                         producto.Existencias,
                         producto.EstadoProducto,
                         producto.FechaIngreso,
                         producto.PrecioCompra,
-                        producto.PrecioVenta};
-                    tabla.addRow(row);//una vez creada la variabla se procede a agregar la fila a la tabla
+                        producto.PrecioVenta,
+                        producto.FechaUltimaMod};
+                    tabla.addRow(row);
 
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Tienes que colocar una palabra para buscar", "Error", JOptionPane.ERROR_MESSAGE);//en caso de que no 
-            //haya ningun texto en la barra de busqueda se muestra un mensaje a tomar en consideracion.
+            if (tabla.getRowCount() > 0) {
+                while (tabla.getRowCount() > 0) {
+                    tabla.removeRow(0);
+                }
+            }
+            for (Producto producto : ArchivoProductos.Productos) {
+                //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
+                Object[] row = {producto.Nombre,
+                    producto.Codigo,
+                    producto.Descripcion,
+                    producto.Existencias,
+                    producto.EstadoProducto,
+                    producto.FechaIngreso,
+                    producto.PrecioCompra,
+                    producto.PrecioVenta,
+                    producto.FechaUltimaMod};
+                tabla.addRow(row);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -220,43 +272,43 @@ public class BuscarNombre extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBusquedaActionPerformed
 
     private void btnLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTablaActionPerformed
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();//para limpiar la tabla con un boton se 
-        if (tabla.getRowCount() > 0) {//realiza el mismo procedimiento, mientras hayan filas en la tabla
-            while (tabla.getRowCount() > 0) {//se va a ir eliminando la primera hasta que no quede ninguna
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        if (tabla.getRowCount() > 0) {
+            while (tabla.getRowCount() > 0) {
                 tabla.removeRow(0);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "La tabla ya se encuentra limpia", "Info", JOptionPane.INFORMATION_MESSAGE);//si se trata
-            //de limpiar la tabla cuando ya esta limpia esta mostrara un mensaje.
+            JOptionPane.showMessageDialog(null, "La tabla ya se encuentra limpia", "Info", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnLimpiarTablaActionPerformed
 
     private void btnLimpiarTabla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTabla1ActionPerformed
-        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");// para guardar las modificaciones se abre el fichero 
-        ArchivoProductos.LeerProductos();//se carga en memoria toda su informacion
-        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();// se crea una referencia de la tabla
-        if (tabla.getRowCount() > 0) {//se verifica que haya filas
-            while (tabla.getRowCount() > 0) {//mientras haya filas disponibles
-                for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {//se va a buscar entre todos los productos 
-                    if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(0, 5))) {//al que coincida con
-                        ArchivoProductos.Productos.get(i).Nombre = (String)tabla.getValueAt(0,0);//la fecha de creacion,
-                        ArchivoProductos.Productos.get(i).Codigo = (String)tabla.getValueAt(0,1);//y de esta manera, se actualiza los datos en memoria
-                        ArchivoProductos.Productos.get(i).Descripcion = (String)tabla.getValueAt(0,2);//actualizamos la priemra fila
-                        ArchivoProductos.Productos.get(i).Existencias = (String)tabla.getValueAt(0,3);//y eso lo hacemos actualizando todas sus 
-                        ArchivoProductos.Productos.get(i).EstadoProducto = (String)tabla.getValueAt(0,4);//columnas al mismo tiempo
-                        ArchivoProductos.Productos.get(i).PrecioCompra = (String)tabla.getValueAt(0,6);
-                        ArchivoProductos.Productos.get(i).PrecioVenta = (String)tabla.getValueAt(0,7);
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
+        ArchivoProductos.LeerProductos();
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        if (tabla.getRowCount() > 0) {
+            while (tabla.getRowCount() > 0) {
+                for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {
+                    if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(0, 5))) {
+                        ArchivoProductos.Productos.get(i).Nombre = (String) tabla.getValueAt(0, 0);
+                        ArchivoProductos.Productos.get(i).Codigo = (String) tabla.getValueAt(0, 1);
+                        ArchivoProductos.Productos.get(i).Descripcion = (String) tabla.getValueAt(0, 2);
+                        ArchivoProductos.Productos.get(i).Existencias = (int) tabla.getValueAt(0, 3);
+                        ArchivoProductos.Productos.get(i).EstadoProducto = (String) tabla.getValueAt(0, 4);
+                        ArchivoProductos.Productos.get(i).PrecioCompra = Float.parseFloat(tabla.getValueAt(0, 6).toString());
+                        ArchivoProductos.Productos.get(i).PrecioVenta = Float.parseFloat(tabla.getValueAt(0, 7).toString());
                     }
                 }
-                ArchivoProductos.EscribirProductos(false);//una vez todos los datos son actualizados se guarda en el fichero los 
-                //cambios que se hicieron en la memoria
-                tabla.removeRow(0);//se elimina la fila que recien acabamos de actualizar y se sigue buscando actualizar las siguientes filas
-                
+                ArchivoProductos.EscribirProductos(false);
+                tabla.removeRow(0);
+
             }
-            JOptionPane.showMessageDialog(null, "Los productos han sido actualizados", "Info", JOptionPane.INFORMATION_MESSAGE);//una vez los datos han sido actualizados
-            //se informa mediante un mensaje que se ha logrado actualizar los datos de manera satisfactoria
+            JOptionPane.showMessageDialog(null, "Los productos han sido actualizados", "Info", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnLimpiarTabla1ActionPerformed
+
+    private void jTable1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable1InputMethodTextChanged
+    }//GEN-LAST:event_jTable1InputMethodTextChanged
 
     /**
      * @param args the command line arguments

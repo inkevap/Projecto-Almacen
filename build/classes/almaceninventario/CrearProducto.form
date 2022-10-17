@@ -143,7 +143,9 @@
         <Property name="toolTipText" type="java.lang.String" value="INGRESE SU NOMBRE COMPLETO"/>
       </Properties>
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCodigoFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="txtCodigoPropertyChange"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPrecioCompra">
@@ -151,6 +153,7 @@
         <Property name="toolTipText" type="java.lang.String" value="INGRESE SUS APELLIDOS"/>
       </Properties>
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPrecioCompraFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrecioCompraActionPerformed"/>
       </Events>
     </Component>
@@ -215,6 +218,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="INGRESE SU USUARIO"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtExistenciasFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -235,6 +241,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="INGRESE SU USUARIO"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPrecioVentaFocusLost"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

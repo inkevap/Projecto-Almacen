@@ -113,7 +113,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar por Nombre del Producto"/>
+        <Property name="text" type="java.lang.String" value="Buscar por Codigo del Producto"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -137,15 +137,16 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="0">
-                <Column editable="true" title="Nombre" type="java.lang.Object"/>
-                <Column editable="true" title="Codigo" type="java.lang.Object"/>
-                <Column editable="true" title="Descripcion" type="java.lang.Object"/>
-                <Column editable="true" title="Existencias" type="java.lang.Object"/>
-                <Column editable="true" title="Estado del Producto" type="java.lang.Object"/>
-                <Column editable="false" title="Fecha de Ingreso" type="java.lang.Object"/>
-                <Column editable="true" title="Precio de Compra" type="java.lang.Object"/>
-                <Column editable="true" title="Precio de venta" type="java.lang.Object"/>
+              <Table columnCount="9" rowCount="0">
+                <Column editable="true" title="Nombre" type="java.lang.String"/>
+                <Column editable="true" title="Codigo" type="java.lang.String"/>
+                <Column editable="true" title="Descripcion" type="java.lang.String"/>
+                <Column editable="true" title="Existencias" type="java.lang.Integer"/>
+                <Column editable="true" title="Estado del Producto" type="java.lang.String"/>
+                <Column editable="false" title="Fecha de Ingreso" type="java.lang.String"/>
+                <Column editable="true" title="Precio de Compra" type="java.lang.Float"/>
+                <Column editable="true" title="Precio de venta" type="java.lang.Float"/>
+                <Column editable="true" title="Ultima Modificacion" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>

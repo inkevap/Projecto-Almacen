@@ -28,7 +28,8 @@ public class BorrarProducto extends javax.swing.JFrame {
                 producto.EstadoProducto,
                 producto.FechaIngreso,
                 producto.PrecioCompra,
-                producto.PrecioVenta};
+                producto.PrecioVenta,
+                producto.FechaUltimaMod};
             tabla.addRow(row);//una vez que todas las caracteriticas estan guardadas
             //estas se muestran en la tabla como una fila
 
@@ -52,6 +53,8 @@ public class BorrarProducto extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        txtBusqueda = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +115,20 @@ public class BorrarProducto extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setHeaderValue("Existencias");
         }
 
+        jButton3.setText("Buscar Producto");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        txtBusqueda.setToolTipText("Ingresa el codigo que deseas buscar.");
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,16 +139,23 @@ public class BorrarProducto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(285, 285, 285)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(241, 241, 241))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(jButton3)
+                .addGap(28, 28, 28)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -141,9 +165,13 @@ public class BorrarProducto extends javax.swing.JFrame {
                 .addComponent(btnSalir)
                 .addGap(13, 13, 13)
                 .addComponent(jLabel1)
-                .addGap(49, 49, 49)
-                .addComponent(jButton2)
-                .addGap(22, 22, 22)
+                .addGap(15, 15, 15)
+                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -172,7 +200,7 @@ public class BorrarProducto extends javax.swing.JFrame {
         ArchivoProductos.LeerProductos();//se lee la informacion de la misma 
         for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {// aqui vamos comparando quien cumple con los datos de la fila seleccionada
             if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(jTable1.getSelectedRow(), 5))) {//si la fecha de creacion es igual
-                if (Integer.parseInt(ArchivoProductos.Productos.get(i).Existencias) > 0) {//se verifica si tiene existencias antes de eliminar lo
+                if (ArchivoProductos.Productos.get(i).Existencias > 0) {//se verifica si tiene existencias antes de eliminar lo
                     JOptionPane.showMessageDialog(null, "El producto no se puede eliminar si tiene existencias", "Info", JOptionPane.INFORMATION_MESSAGE);//si tiene existencias
                     //no se va a poder eliminar por lo tanto va a mostrar una adevertencia
                 } else {
@@ -192,6 +220,62 @@ public class BorrarProducto extends javax.swing.JFrame {
     private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1FocusGained
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
+        ArchivoProductos.LeerProductos();
+        if (!txtBusqueda.getText().isEmpty()) {
+            if (tabla.getRowCount() > 0) {
+                while (tabla.getRowCount() > 0) {
+                    tabla.removeRow(0);
+                }
+            }
+            for (Producto producto : ArchivoProductos.Productos) {
+                if (producto.Codigo.toLowerCase().contains(txtBusqueda.getText().toLowerCase())
+                        || producto.Nombre.toLowerCase().contains(txtBusqueda.getText().toLowerCase())) {// <<<<<<<------ ESTA ES LA UNICA LINEA QUE CAMBIA, CAMBIA DE HACER LA
+                    //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
+                    Object[] row = {producto.Nombre,
+                        producto.Codigo,
+                        producto.Descripcion,
+                        producto.Existencias,
+                        producto.EstadoProducto,
+                        producto.FechaIngreso,
+                        producto.PrecioCompra,
+                        producto.PrecioVenta,
+                        producto.FechaUltimaMod};
+                    tabla.addRow(row);
+
+                }
+            }
+        } else {
+            if (tabla.getRowCount() > 0) {
+                while (tabla.getRowCount() > 0) {
+                    tabla.removeRow(0);
+                }
+            }
+            for (Producto producto : ArchivoProductos.Productos) {//guardamos las caracteristicas de cada producto en una sola variable
+
+                Object[] row = {producto.Nombre,
+                    producto.Codigo,
+                    producto.Descripcion,
+                    producto.Existencias,
+                    producto.EstadoProducto,
+                    producto.FechaIngreso,
+                    producto.PrecioCompra,
+                    producto.PrecioVenta,
+                    producto.FechaUltimaMod};
+                tabla.addRow(row);//una vez que todas las caracteriticas estan guardadas
+                //estas se muestran en la tabla como una fila
+
+                /*Este proceso se repite con todos los productos que esten guardados en la basde de datos.*/
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,8 +347,10 @@ public class BorrarProducto extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }

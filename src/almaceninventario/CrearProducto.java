@@ -65,13 +65,28 @@ public class CrearProducto extends javax.swing.JFrame {
         jLabel1.setText("CREAR UN NUEVO USUARIO");
 
         txtCodigo.setToolTipText("INGRESE SU NOMBRE COMPLETO");
+        txtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoFocusLost(evt);
+            }
+        });
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
             }
         });
+        txtCodigo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtCodigoPropertyChange(evt);
+            }
+        });
 
         txtPrecioCompra.setToolTipText("INGRESE SUS APELLIDOS");
+        txtPrecioCompra.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPrecioCompraFocusLost(evt);
+            }
+        });
         txtPrecioCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioCompraActionPerformed(evt);
@@ -117,6 +132,11 @@ public class CrearProducto extends javax.swing.JFrame {
         });
 
         txtExistencias.setToolTipText("INGRESE SU USUARIO");
+        txtExistencias.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtExistenciasFocusLost(evt);
+            }
+        });
 
         jLabel7.setText("NOMBRE");
 
@@ -125,6 +145,11 @@ public class CrearProducto extends javax.swing.JFrame {
         jLabel9.setText("EXISTENCIAS");
 
         txtPrecioVenta.setToolTipText("INGRESE SU USUARIO");
+        txtPrecioVenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPrecioVentaFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,36 +244,39 @@ public class CrearProducto extends javax.swing.JFrame {
     private void txtPrecioCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioCompraActionPerformed
-      // La fecha tiene formato asignado, esto para que cuando tome la hora y fecha de hoy lo coloque en un formato agradable
+    // La fecha tiene formato asignado, esto para que cuando tome la hora y fecha de hoy lo coloque en un formato agradable
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");//definimos primero las variables que van
-        String FechaIngreso = dateFormat.format(Calendar.getInstance().getTime());// a contener
-        String Codigo = txtCodigo.getText();//la informacion para hacer un producto individual
-        int PrecioCompra = Integer.parseInt(txtPrecioCompra.getText());
-        String EstadoProducto = txtEstadoProducto.getText();
-        int PrecioVenta = Integer.parseInt(txtPrecioVenta.getText());
-        String Nombre = txtNombre.getText();
-        String Descripcion = txtDescripcion.getText();
-        int Existencias = Integer.parseInt(txtExistencias.getText());
 
-        if (!Codigo.isEmpty()// verificamos que las casillas tengan contenido 
-                && PrecioCompra > -1//para evitarnos errores
-                && !EstadoProducto.isEmpty()
-                && PrecioVenta > -1
-                && !Nombre.isEmpty()
-                && !Descripcion.isEmpty()
-                && Existencias > -1) {
+        if (!txtCodigo.getText().isEmpty()// verificamos que las casillas tengan contenido 
+                && !txtPrecioCompra.getText().isEmpty()//para evitarnos errores
+                && !txtEstadoProducto.getText().isEmpty()
+                && !txtPrecioVenta.getText().isEmpty()
+                && !txtNombre.getText().isEmpty()
+                && !txtDescripcion.getText().isEmpty()
+                && !txtExistencias.getText().isEmpty()) {
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");//definimos primero las variables que van
+            String FechaIngreso = dateFormat.format(Calendar.getInstance().getTime());// a contener
+            String Codigo = txtCodigo.getText();//la informacion para hacer un producto individual
+            float PrecioCompra = Float.parseFloat(txtPrecioCompra.getText());
+            String EstadoProducto = txtEstadoProducto.getText();
+            float PrecioVenta = Float.parseFloat(txtPrecioVenta.getText());
+            String Nombre = txtNombre.getText();
+            String Descripcion = txtDescripcion.getText();
+            int Existencias = Integer.parseInt(txtExistencias.getText());
+            String FechaUltimaModificacion = dateFormat.format(Calendar.getInstance().getTime());
 
             ArchivoProductos Productos = new ArchivoProductos("Productos.txt");// Abrimos nuestra base de datos en fichero
             Producto ProductoTemp = new Producto(//creamos el producto per se 
                     Codigo,//agregamos todos los valores que previamente definimos
                     FechaIngreso,
-                    String.valueOf(PrecioCompra),
+                    PrecioCompra,
                     EstadoProducto,
-                    String.valueOf(PrecioVenta),
+                    PrecioVenta,
                     Nombre,
                     Descripcion,
-                    String.valueOf(Existencias)
+                    Existencias,
+                    FechaUltimaModificacion
             );
             Productos.Productos.add(ProductoTemp);//Agregamos el nuevo usuario a nuestra base de datos que previamente habiamos cargado
             Productos.EscribirProductos(true);//Escribimos el nuevo producto con la opcion de cantenar la que ya teniamos, en este caso porque
@@ -274,6 +302,56 @@ public class CrearProducto extends javax.swing.JFrame {
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void txtCodigoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtCodigoPropertyChange
+
+    }//GEN-LAST:event_txtCodigoPropertyChange
+
+    private void txtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusLost
+        ArchivoProductos Productos = new ArchivoProductos("Productos.txt");
+        Productos.LeerProductos();
+        for (Producto producto : Productos.Productos) {
+            if (producto.Codigo.equalsIgnoreCase(txtCodigo.getText())
+                    && !txtCodigo.getText().equalsIgnoreCase("")) {
+                txtCodigo.setText("");
+                JOptionPane.showMessageDialog(null, "El Codigo Ingresado ya existe, ingrese uno distinto", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            }
+        }
+    }//GEN-LAST:event_txtCodigoFocusLost
+
+    private void txtPrecioCompraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioCompraFocusLost
+        try {
+            if (!txtPrecioCompra.getText().equalsIgnoreCase("")) {
+                Float.parseFloat(txtPrecioCompra.getText());
+            }
+        } catch (Exception e) {
+            txtPrecioCompra.setText("");
+            JOptionPane.showMessageDialog(null, "El precio de compra debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtPrecioCompraFocusLost
+
+    private void txtPrecioVentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioVentaFocusLost
+        try {
+            if (!txtPrecioVenta.getText().equalsIgnoreCase("")) {
+                Float.parseFloat(txtPrecioVenta.getText());
+            }
+        } catch (Exception e) {
+            txtPrecioVenta.setText("");
+            JOptionPane.showMessageDialog(null, "El precio de venta debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtPrecioVentaFocusLost
+
+    private void txtExistenciasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtExistenciasFocusLost
+        try {
+            if (!txtExistencias.getText().equalsIgnoreCase("")) {
+                Integer.parseInt(txtExistencias.getText());
+            }
+        } catch (Exception e) {
+            txtExistencias.setText("");
+            JOptionPane.showMessageDialog(null, "La existencia debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtExistenciasFocusLost
 
     /**
      * @param args the command line arguments
