@@ -5,6 +5,9 @@
  */
 package almaceninventario;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -277,18 +280,30 @@ public class BuscarCodigo extends javax.swing.JFrame {
     private void btnLimpiarTabla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTabla1ActionPerformed
         ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
         ArchivoProductos.LeerProductos();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         if (tabla.getRowCount() > 0) {
             while (tabla.getRowCount() > 0) {
                 for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {
                     if (ArchivoProductos.Productos.get(i).FechaIngreso.equalsIgnoreCase((String) tabla.getValueAt(0, 5))) {
-                        ArchivoProductos.Productos.get(i).Nombre = (String) tabla.getValueAt(0, 0);
-                        ArchivoProductos.Productos.get(i).Codigo = (String) tabla.getValueAt(0, 1);
-                        ArchivoProductos.Productos.get(i).Descripcion = (String) tabla.getValueAt(0, 2);
-                        ArchivoProductos.Productos.get(i).Existencias = (int) tabla.getValueAt(0, 3);
-                        ArchivoProductos.Productos.get(i).EstadoProducto = (String) tabla.getValueAt(0, 4);
-                        ArchivoProductos.Productos.get(i).PrecioCompra = Float.parseFloat(tabla.getValueAt(0, 6).toString());
-                        ArchivoProductos.Productos.get(i).PrecioVenta = Float.parseFloat(tabla.getValueAt(0, 7).toString());
+                        if (!ArchivoProductos.Productos.get(i).Nombre.equalsIgnoreCase((String) tabla.getValueAt(0, 0))
+                                || !ArchivoProductos.Productos.get(i).Codigo.equalsIgnoreCase((String) tabla.getValueAt(0, 1))
+                                || !ArchivoProductos.Productos.get(i).Descripcion.equalsIgnoreCase((String) tabla.getValueAt(0, 2))
+                                || !(ArchivoProductos.Productos.get(i).Existencias == (int) tabla.getValueAt(0, 3))
+                                || !ArchivoProductos.Productos.get(i).EstadoProducto.equalsIgnoreCase((String) tabla.getValueAt(0, 4))
+                                || !(ArchivoProductos.Productos.get(i).PrecioCompra == Float.parseFloat(tabla.getValueAt(0, 6).toString()))
+                                || !(ArchivoProductos.Productos.get(i).PrecioVenta == Float.parseFloat(tabla.getValueAt(0, 7).toString()))) {
+
+                            String FechaUltimaModificacion = dateFormat.format(Calendar.getInstance().getTime());
+                            ArchivoProductos.Productos.get(i).Nombre = (String) tabla.getValueAt(0, 0);
+                            ArchivoProductos.Productos.get(i).Codigo = (String) tabla.getValueAt(0, 1);
+                            ArchivoProductos.Productos.get(i).Descripcion = (String) tabla.getValueAt(0, 2);
+                            ArchivoProductos.Productos.get(i).Existencias = (int) tabla.getValueAt(0, 3);
+                            ArchivoProductos.Productos.get(i).EstadoProducto = (String) tabla.getValueAt(0, 4);
+                            ArchivoProductos.Productos.get(i).PrecioCompra = Float.parseFloat(tabla.getValueAt(0, 6).toString());
+                            ArchivoProductos.Productos.get(i).PrecioVenta = Float.parseFloat(tabla.getValueAt(0, 7).toString());
+                            ArchivoProductos.Productos.get(i).FechaUltimaMod = FechaUltimaModificacion;
+                        }
                     }
                 }
                 ArchivoProductos.EscribirProductos(false);
