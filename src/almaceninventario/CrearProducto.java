@@ -255,7 +255,7 @@ public class CrearProducto extends javax.swing.JFrame {
                 && !txtDescripcion.getText().isEmpty()
                 && !txtExistencias.getText().isEmpty()) {
 
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");//definimos primero las variables que van
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//definimos primero las variables que van
             String FechaIngreso = dateFormat.format(Calendar.getInstance().getTime());// a contener
             String Codigo = txtCodigo.getText();//la informacion para hacer un producto individual
             float PrecioCompra = Float.parseFloat(txtPrecioCompra.getText());
