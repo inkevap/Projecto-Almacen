@@ -34,15 +34,17 @@ public class ArchivoProductos {
             //cuando el programa falle
             Scanner scanner = new Scanner(new File(Direccion));//leemos el fichero de nuestra DDBB(base de datos)
             while (scanner.hasNextLine()) {//verificamos que mientras tenga datos
+                scanner.nextLine();
                 Producto Product = new Producto(//se cree un Producto con esos datos en el siguiente orden
                         scanner.nextLine(),//Codigo
                         scanner.nextLine(),//Fecha Ingreso
-                        scanner.nextLine(),//PrecioCompra
+                        Float.parseFloat(scanner.nextLine()),//PrecioCompra
                         scanner.nextLine(),//EstadoProducto
-                        scanner.nextLine(),//PrecioVenta
+                        Float.parseFloat(scanner.nextLine()),//PrecioVenta
                         scanner.nextLine(),//Nombre
                         scanner.nextLine(),//Descripcion
-                        scanner.nextLine()//Existencias
+                        Integer.parseInt(scanner.nextLine()),//Existencias
+                        scanner.nextLine()//FechaUltimaMod
                 );
                 Productos.add(Product);//agregamos el usuario a nuestra base de datos en memoria
             }
@@ -62,6 +64,7 @@ public class ArchivoProductos {
             FileOutputStream temp = new FileOutputStream(Direccion, Anidar);//Convertimos el fichero a informacion que sea legible para el programa
             Archivo = new PrintStream(temp);//Luego cargamos esa referencia a memoria y estamos listos para escribir informacion en el archivo
             for (Producto producto : Productos) {//cada producto dentro de nuestra base de datos de productos
+                Archivo.println("---------------------------------------------");
                 Archivo.println(producto.Codigo);//va a estar guardando sus parametros en el orden que se muestra a continuacion
                 Archivo.println(producto.FechaIngreso);//es importante que se respete este orden porque es el orden en el que se 
                 Archivo.println(producto.PrecioCompra);//leera y se asignara de nuevo en el futuro,
@@ -70,6 +73,7 @@ public class ArchivoProductos {
                 Archivo.println(producto.Nombre);
                 Archivo.println(producto.Descripcion);
                 Archivo.println(producto.Existencias);
+                Archivo.println(producto.FechaUltimaMod);
             }
             Archivo.flush();//limpiamos la memoria de los ficheros que hemos cargado
             Archivo.close();//y cerramos el fichero y eliminamos la referencia del fichero

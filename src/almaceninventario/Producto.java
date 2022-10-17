@@ -11,22 +11,24 @@ public class Producto {
 
     String Codigo;
     String FechaIngreso;
-    String PrecioCompra;
+    float PrecioCompra;
     String EstadoProducto;
-    String PrecioVenta;
+    float PrecioVenta;
     String Nombre;
     String Descripcion;
-    String Existencias;
+    int Existencias;
+    String FechaUltimaMod;
 
     public Producto(
             String Codigo,
             String FechaIngreso,
-            String PrecioCompra,
+            float PrecioCompra,
             String EstadoProducto,
-            String PrecioVenta,
+            float PrecioVenta,
             String Nombre,
             String Descripcion,
-            String Existencias
+            int Existencias,
+            String FechaUltimaMod
             ) {
         this.Codigo = Codigo;
         this.FechaIngreso = FechaIngreso;
@@ -36,6 +38,7 @@ public class Producto {
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.Existencias = Existencias;
+        this.FechaUltimaMod = FechaUltimaMod;
     }
 
     public Producto() {

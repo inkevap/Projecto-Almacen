@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.text.DateFormat;
 import javax.swing.JOptionPane;
 
 /*
@@ -24,7 +22,7 @@ verificar la clas para tener mayor conocimiento de su funcionalidad a detalle
 public class ArchivoUsuarios {
 
     public ArrayList<Usuario> Usuarios = new ArrayList();
-    private String Direccion;
+    private final String Direccion;
 
     public ArchivoUsuarios(String Direccion) {
         this.Direccion = Direccion;
@@ -35,6 +33,7 @@ public class ArchivoUsuarios {
         try {
             Scanner scanner = new Scanner(new File(Direccion));//lo unico que cambia son los parametros
             while (scanner.hasNextLine()) {//los parametros aqui usado son los de usuarios
+                scanner.nextLine();
                 Usuario user = new Usuario(
                         scanner.nextLine(),//Nombre
                         scanner.nextLine(),//Apellido
@@ -53,16 +52,13 @@ public class ArchivoUsuarios {
         return Usuarios;
     }
 
-    public Boolean hayUsuarios() {
-        return (Usuarios.size() == 0) ? false : true;
-    }
-
     public void EscribirUsuarios() {
         try {
             PrintStream Archivo;
             FileOutputStream temp = new FileOutputStream(Direccion, true);
             Archivo = new PrintStream(temp);
             for (Usuario usuario : Usuarios) {
+                Archivo.println("---------------------------------------------");
                 Archivo.println(usuario.Nombre);
                 Archivo.println(usuario.Apellido);
                 Archivo.println(usuario.Us);

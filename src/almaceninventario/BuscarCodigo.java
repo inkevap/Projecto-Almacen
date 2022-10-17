@@ -13,14 +13,36 @@ import javax.swing.table.DefaultTableModel;
  * @author Windows 10
  */
 public class BuscarCodigo extends javax.swing.JFrame {
-/*
+
+    /*
     ESTE CODIGO FUNCIONA EXACTAMENTE IGUAL A BUSCARNOMBRE CON LA UNICA DIFERENCIA DE QUE
     AQUI SE ESTA BUSCANDO A LOS USUARIOS POR EL CODIGO Y NO POR EL NOMBRE
-    */
+     */
     private String UltimaBusqueda = "";
 
     public BuscarCodigo() {
         initComponents();
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        ArchivoProductos ArchivoProductos = new ArchivoProductos("Productos.txt");
+        ArchivoProductos.LeerProductos();
+        if (tabla.getRowCount() > 0) {
+            while (tabla.getRowCount() > 0) {
+                tabla.removeRow(0);
+            }
+        }
+        for (Producto producto : ArchivoProductos.Productos) {
+            //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
+            Object[] row = {producto.Nombre,
+                producto.Codigo,
+                producto.Descripcion,
+                producto.Existencias,
+                producto.EstadoProducto,
+                producto.FechaIngreso,
+                producto.PrecioCompra,
+                producto.PrecioVenta,
+                producto.FechaUltimaMod};
+            tabla.addRow(row);
+        }
 
     }
 
@@ -64,7 +86,7 @@ public class BuscarCodigo extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Buscar por Nombre del Producto");
+        jButton2.setText("Buscar por Codigo del Producto");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -83,12 +105,19 @@ public class BuscarCodigo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Codigo", "Descripcion", "Existencias", "Estado del Producto", "Fecha de Ingreso", "Precio de Compra", "Precio de venta"
+                "Nombre", "Codigo", "Descripcion", "Existencias", "Estado del Producto", "Fecha de Ingreso", "Precio de Compra", "Precio de venta", "Ultima Modificacion"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false, true, true
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -193,7 +222,7 @@ public class BuscarCodigo extends javax.swing.JFrame {
                 }
             }
             for (Producto producto : ArchivoProductos.Productos) {
-                if (producto.Codigo.matches(txtBusqueda.getText())) {// <<<<<<<------ ESTA ES LA UNICA LINEA QUE CAMBIA, CAMBIA DE HACER LA 
+                if (producto.Codigo.toLowerCase().contains(txtBusqueda.getText().toLowerCase())) {// <<<<<<<------ ESTA ES LA UNICA LINEA QUE CAMBIA, CAMBIA DE HACER LA 
                     //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
                     Object[] row = {producto.Nombre,
                         producto.Codigo,
@@ -202,13 +231,31 @@ public class BuscarCodigo extends javax.swing.JFrame {
                         producto.EstadoProducto,
                         producto.FechaIngreso,
                         producto.PrecioCompra,
-                        producto.PrecioVenta};
+                        producto.PrecioVenta,
+                        producto.FechaUltimaMod};
                     tabla.addRow(row);
 
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Tienes que colocar una palabra para buscar", "Error", JOptionPane.ERROR_MESSAGE);
+            if (tabla.getRowCount() > 0) {
+                while (tabla.getRowCount() > 0) {
+                    tabla.removeRow(0);
+                }
+            }
+            for (Producto producto : ArchivoProductos.Productos) {
+                //COMPARACION DE CODIGO A NOMBRE, VERIFICAR EN BUSCARNOMBRE() PARA MAYOR DETALLE DE COMO FUNCIONA LA BUSQUEDA.
+                Object[] row = {producto.Nombre,
+                    producto.Codigo,
+                    producto.Descripcion,
+                    producto.Existencias,
+                    producto.EstadoProducto,
+                    producto.FechaIngreso,
+                    producto.PrecioCompra,
+                    producto.PrecioVenta,
+                    producto.FechaUltimaMod};
+                tabla.addRow(row);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -238,10 +285,10 @@ public class BuscarCodigo extends javax.swing.JFrame {
                         ArchivoProductos.Productos.get(i).Nombre = (String) tabla.getValueAt(0, 0);
                         ArchivoProductos.Productos.get(i).Codigo = (String) tabla.getValueAt(0, 1);
                         ArchivoProductos.Productos.get(i).Descripcion = (String) tabla.getValueAt(0, 2);
-                        ArchivoProductos.Productos.get(i).Existencias = (String) tabla.getValueAt(0, 3);
+                        ArchivoProductos.Productos.get(i).Existencias = (int) tabla.getValueAt(0, 3);
                         ArchivoProductos.Productos.get(i).EstadoProducto = (String) tabla.getValueAt(0, 4);
-                        ArchivoProductos.Productos.get(i).PrecioCompra = (String) tabla.getValueAt(0, 6);
-                        ArchivoProductos.Productos.get(i).PrecioVenta = (String) tabla.getValueAt(0, 7);
+                        ArchivoProductos.Productos.get(i).PrecioCompra = Float.parseFloat(tabla.getValueAt(0, 6).toString());
+                        ArchivoProductos.Productos.get(i).PrecioVenta = Float.parseFloat(tabla.getValueAt(0, 7).toString());
                     }
                 }
                 ArchivoProductos.EscribirProductos(false);
