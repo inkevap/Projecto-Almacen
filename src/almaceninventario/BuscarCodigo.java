@@ -21,7 +21,6 @@ public class BuscarCodigo extends javax.swing.JFrame {
     ESTE CODIGO FUNCIONA EXACTAMENTE IGUAL A BUSCARNOMBRE CON LA UNICA DIFERENCIA DE QUE
     AQUI SE ESTA BUSCANDO A LOS USUARIOS POR EL CODIGO Y NO POR EL NOMBRE
      */
-    private String UltimaBusqueda = "";
 
     public BuscarCodigo() {
         initComponents();
