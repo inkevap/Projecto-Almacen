@@ -5,9 +5,9 @@
  */
 package almaceninventario;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import almaceninventario.ProductosVendidos;
 
 
 /*Este no es mas que un  modelo del usuario, este nos sirve para poder crear usuarios
@@ -16,7 +16,7 @@ public class Venta {
 
     String Nombre;
     String NIT;
-    HashMap<String, Integer> Codigos_Cantidad;
+    ArrayList<ProductosVendidos> productosVendidos;
     String PwdUsuario;
     String TipoUsuario;
     String NoVenta;
@@ -25,7 +25,7 @@ public class Venta {
     public Venta(//El usuario se puede crear dando le los parametros al 
             String Nombre,
             String NIT,
-            HashMap<String, Integer> Codigos_Cantidad,
+            ArrayList<ProductosVendidos> productosVendidos,
             String PwdUsuario,
             String TipoUsuario,
             String NoVenta,
@@ -33,7 +33,7 @@ public class Venta {
     ) {
         this.Nombre = Nombre;
         this.NIT = NIT;
-        this.Codigos_Cantidad = Codigos_Cantidad;
+        this.productosVendidos = productosVendidos;
         this.PwdUsuario = PwdUsuario;
         this.TipoUsuario = TipoUsuario;
         this.NoVenta = NoVenta;
