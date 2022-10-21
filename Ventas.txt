@@ -1,0 +1,79 @@
+---------------------------------------------
+kevin
+1792
+0000001
+2022-10-20 22:19:25
+400.0
+1
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+---------------------------------------------
+Calvin
+2971
+0000002
+2022-10-20 22:19:43
+800.0
+2
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+---------------------------------------------
+Calvin Pocon
+2971
+0000003
+2022-10-20 22:19:54
+800.0
+2
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+---------------------------------------------
+Kevin Pocon
+1792
+0000004
+2022-10-20 22:20:17
+1100.0
+3
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+Pescado frito+Comida4+Plato de comida+Fresco+20+15.0+300.0
+---------------------------------------------
+Kevin Pocon
+1792
+0000005
+2022-10-20 22:20:44
+1100.0
+3
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+Pescado frito+Comida4+Plato de comida+Fresco+20+15.0+300.0
+---------------------------------------------
+Kevin Pocon
+1792
+0000006
+2022-10-20 22:20:46
+700.0
+2
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+Pescado frito+Comida4+Plato de comida+Fresco+20+15.0+300.0
+---------------------------------------------
+Kevin Pocon
+1792
+0000007
+2022-10-20 22:20:47
+400.0
+1
+Hamburguesa+Comida1+Hamburguesa 3 carnes doble queso+Recien hecha+2+200.0+400.0
+---------------------------------------------
+k
+1792
+00000008
+2022-10-20 23:03:48
+825.0
+1
+Agua pura+Comida2+Agua pura fria+Al tiempo+11+75.0+825.0
+---------------------------------------------
+p
+5789
+00000009
+2022-10-20 23:05:40
+300.0
+1
+Pescado frito+Comida4+Plato de comida+Fresco+20+15.0+300.0
