@@ -16,9 +16,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Windows 10
  */
 public class RegistrarVenta extends javax.swing.JFrame {
-    
+
+    Venta VentaTemp;
     float total = 0;
-    
+
     public RegistrarVenta() {
         initComponents();
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
@@ -41,7 +42,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
             tabla.addRow(row);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -56,8 +57,8 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        txtBusqueda1 = new javax.swing.JTextField();
-        txtBusqueda2 = new javax.swing.JTextField();
+        txtComprador = new javax.swing.JTextField();
+        txtNIT = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -212,17 +213,17 @@ public class RegistrarVenta extends javax.swing.JFrame {
             jTable3.getColumnModel().getColumn(3).setHeaderValue("Existencias");
         }
 
-        txtBusqueda1.setToolTipText("Ingresa el codigo que deseas buscar.");
-        txtBusqueda1.addActionListener(new java.awt.event.ActionListener() {
+        txtComprador.setToolTipText("Ingresa El nombre del comprador");
+        txtComprador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusqueda1ActionPerformed(evt);
+                txtCompradorActionPerformed(evt);
             }
         });
 
-        txtBusqueda2.setToolTipText("Ingresa el codigo que deseas buscar.");
-        txtBusqueda2.addActionListener(new java.awt.event.ActionListener() {
+        txtNIT.setToolTipText("Ingresa el codigo que deseas buscar.");
+        txtNIT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusqueda2ActionPerformed(evt);
+                txtNITActionPerformed(evt);
             }
         });
 
@@ -268,7 +269,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtComprador, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
                                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -277,7 +278,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtBusqueda2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -309,8 +310,8 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(txtBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBusqueda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComprador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +367,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
                         0,
                         producto.PrecioVenta};
                     tabla.addRow(row);
-                    
+
                 }
             }
         } else {
@@ -398,16 +399,75 @@ public class RegistrarVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarTablaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//    ProductosVendidos vendido = new ProductoVendidos();
+        DefaultTableModel tabla2 = (DefaultTableModel) jTable3.getModel();
+        ArchivoVentas Ventas = new ArchivoVentas("Ventas.txt");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Ventas.LeerVentas();
+
+        int CantidadProductos = tabla2.getRowCount();
+        if (CantidadProductos > 0) {
+            System.out.println("Toy dentro");
+            String Nombre = txtComprador.getText();
+            String NIT = txtNIT.getText();
+            String noVenta = String.format("%08d", Ventas.Ventas.size() + 1);
+            String FechaCreacion = dateFormat.format(Calendar.getInstance().getTime());
+            float Total = Float.parseFloat(jLabel4.getText());
+            if (!Nombre.isEmpty() && !NIT.isEmpty()) {
+                VentaTemp = new Venta(
+                        Nombre,
+                        NIT,
+                        noVenta,
+                        FechaCreacion,
+                        Total
+                );
+                for (int i = 0; i < CantidadProductos; i++) {
+                    System.out.println("Toy dentro2");
+                    String NombreProd = tabla2.getValueAt(i, 0).toString();
+                    String Codigo = tabla2.getValueAt(i, 1).toString();
+                    String Descripcion = tabla2.getValueAt(i, 2).toString();
+                    String EstadoProducto = tabla2.getValueAt(i, 3).toString();
+                    int Cantidad = Integer.parseInt(tabla2.getValueAt(i, 4).toString());
+                    float PrecioUnidad = Float.parseFloat(tabla2.getValueAt(i, 5).toString());
+                    float Subtotal = Float.parseFloat(tabla2.getValueAt(i, 6).toString());
+
+                    ProductoVendido ProductoVendidoTemp = new ProductoVendido(
+                            NombreProd,
+                            Codigo,
+                            Descripcion,
+                            EstadoProducto,
+                            Cantidad,
+                            PrecioUnidad,
+                            Subtotal
+                    );
+                    System.out.println("Toy dentro3");
+                    VentaTemp.AddProductoVendido(ProductoVendidoTemp);
+                }
+                Ventas.Ventas.add(VentaTemp);
+                Ventas.EscribirVentas(false);
+                GestionVentas GestionVentas = new GestionVentas();
+                GestionVentas.setVisible(true);
+                this.setVisible(false);
+                MostrarVenta MostrarVenta = new MostrarVenta(VentaTemp);
+                MostrarVenta.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Agrega Nombre y NIT para crear la venta", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Agrega productos para crear la venta", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void txtBusqueda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusqueda1ActionPerformed
+    private void txtCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCompradorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBusqueda1ActionPerformed
+    }//GEN-LAST:event_txtCompradorActionPerformed
 
-    private void txtBusqueda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusqueda2ActionPerformed
+    private void txtNITActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNITActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBusqueda2ActionPerformed
+    }//GEN-LAST:event_txtNITActionPerformed
 
     private void jTable3InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable3InputMethodTextChanged
         // TODO add your handling code here:
@@ -438,13 +498,13 @@ public class RegistrarVenta extends javax.swing.JFrame {
             int SelectedItem = -1;
             int CantidadSel = (Integer) tabla.getValueAt(jTable1.getSelectedRow(), 5);
             String CodigoSel = (String) tabla.getValueAt(jTable1.getSelectedRow(), 1);
-            
+
             for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {
                 if (ArchivoProductos.Productos.get(i).Codigo.equalsIgnoreCase(CodigoSel)) {
                     SelectedItem = i;
                 }
             }
-            
+
             if (ArchivoProductos.Productos.get(SelectedItem).Existencias >= CantidadSel
                     && SelectedItem >= 0 && CantidadSel > 0) {
                 Object[] row = {
@@ -462,12 +522,12 @@ public class RegistrarVenta extends javax.swing.JFrame {
             } else if (ArchivoProductos.Productos.get(SelectedItem).Existencias < CantidadSel) {
                 JOptionPane.showMessageDialog(null, "No hay existencias suficientes", "Info", JOptionPane.INFORMATION_MESSAGE);//se mostrara un aviso de que el producto ha sido eliminado
             }
-            
+
             total = 0;
             for (int i = tabla2.getRowCount() - 1; i >= 0; i--) {
                 total += Float.parseFloat(tabla2.getValueAt(i, 6).toString());
                 if (i == 0) {
-                    
+
                     jLabel4.setText(String.valueOf(total));
                 }
             }
@@ -490,26 +550,26 @@ public class RegistrarVenta extends javax.swing.JFrame {
             int FilaAModificar = -1;
             total -= SubtotalSel;
             jLabel4.setText(String.valueOf(total));
-            
+
             for (int i = 0; i < tabla.getRowCount(); i++) {
                 if (tabla.getValueAt(i, 1).toString().equalsIgnoreCase(CodigoSel)) {
                     FilaAModificar = i;
                 }
             }
-            
+
             for (int i = 0; i < ArchivoProductos.Productos.size(); i++) {
                 if (ArchivoProductos.Productos.get(i).Codigo.equalsIgnoreCase(CodigoSel)) {
                     ArchivoProductos.Productos.get(i).Existencias += Cantidad;
                     ArchivoProductos.EscribirProductos(false);
-                    
+
                     if (FilaAModificar >= 0) {
                         tabla.setValueAt(ArchivoProductos.Productos.get(i).Existencias, FilaAModificar, 4);
                     }
                 }
             }
-            
+
             tabla2.removeRow(jTable3.getSelectedRow());
-            
+
         }
     }//GEN-LAST:event_jTable3MouseClicked
 
@@ -564,7 +624,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField txtBusqueda;
-    private javax.swing.JTextField txtBusqueda1;
-    private javax.swing.JTextField txtBusqueda2;
+    private javax.swing.JTextField txtComprador;
+    private javax.swing.JTextField txtNIT;
     // End of variables declaration//GEN-END:variables
 }

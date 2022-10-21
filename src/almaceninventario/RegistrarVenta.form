@@ -50,7 +50,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtBusqueda1" min="-2" pref="207" max="-2" attributes="0"/>
+                                      <Component id="txtComprador" min="-2" pref="207" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -62,7 +62,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="txtBusqueda2" min="-2" pref="216" max="-2" attributes="0"/>
+                                      <Component id="txtNIT" min="-2" pref="216" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
@@ -105,8 +105,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtBusqueda1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtBusqueda2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtComprador" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNIT" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -272,20 +272,20 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtBusqueda1">
+    <Component class="javax.swing.JTextField" name="txtComprador">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Ingresa el codigo que deseas buscar."/>
+        <Property name="toolTipText" type="java.lang.String" value="Ingresa El nombre del comprador"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBusqueda1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCompradorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBusqueda2">
+    <Component class="javax.swing.JTextField" name="txtNIT">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Ingresa el codigo que deseas buscar."/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBusqueda2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNITActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

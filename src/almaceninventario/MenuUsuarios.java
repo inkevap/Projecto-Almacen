@@ -120,7 +120,7 @@ public class MenuUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        IngresoUsuarios Volver = new IngresoUsuarios();
+        MenuPrincipal Volver = new MenuPrincipal();
         Volver.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed

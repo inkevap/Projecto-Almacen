@@ -163,7 +163,7 @@ public class AccesoUsuarios extends javax.swing.JFrame {
                 case "Admin":
                     if (s.ValidarUsuario(UsuarioDB.Usuarios, user, pwd, intentos, "Administrador")) {
                         intentos = 0;
-                        IngresoUsuarios IngresoUsuarios = new IngresoUsuarios("Administrador");
+                        MenuPrincipal IngresoUsuarios = new MenuPrincipal("Administrador");
                         IngresoUsuarios.setVisible(true);
                         this.setVisible(false);
                         break;
@@ -224,7 +224,7 @@ public class AccesoUsuarios extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         // TODO add your handling code here:}
-        IngresoUsuarios IgU = new IngresoUsuarios();
+        MenuPrincipal IgU = new MenuPrincipal();
         IgU.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

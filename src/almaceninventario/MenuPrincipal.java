@@ -9,19 +9,19 @@ package almaceninventario;
  *
  * @author Windows 10
  */
-public class IngresoUsuarios extends javax.swing.JFrame {
+public class MenuPrincipal extends javax.swing.JFrame {
 
     private String TipoUsuario = "nulo"; //creamos una variable que guarda si algun usuario esta logueado
 
     /**
      * Creates new form IngresoUsuarios
      */
-    public IngresoUsuarios() {//en caso de que no se le pase ningun parametro al constructor
+    public MenuPrincipal() {//en caso de que no se le pase ningun parametro al constructor
         TipoUsuario = "nulo";// se asume que nadie esta logueado aun
         initComponents();
     }
 
-    public IngresoUsuarios(String TipoUsuario) {// cuando se le pasa la 
+    public MenuPrincipal(String TipoUsuario) {// cuando se le pasa la 
         this.TipoUsuario = TipoUsuario;//variable al constructor es porque hay alguien que ya se logueo
         initComponents();
     }
@@ -245,27 +245,28 @@ public class IngresoUsuarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IngresoUsuarios.class
+            java.util.logging.Logger.getLogger(MenuPrincipal.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IngresoUsuarios.class
+            java.util.logging.Logger.getLogger(MenuPrincipal.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IngresoUsuarios.class
+            java.util.logging.Logger.getLogger(MenuPrincipal.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IngresoUsuarios.class
+            java.util.logging.Logger.getLogger(MenuPrincipal.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IngresoUsuarios().setVisible(true);
+                new MenuPrincipal().setVisible(true);
             }
         });
     }
