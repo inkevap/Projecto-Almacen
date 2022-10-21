@@ -7,6 +7,7 @@ package almaceninventario;
 
 import java.text.DateFormat;
 //Este es un modelo al igual que la claseUsuario
+
 public class Producto {
 
     String Codigo;
@@ -29,7 +30,7 @@ public class Producto {
             String Descripcion,
             int Existencias,
             String FechaUltimaMod
-            ) {
+    ) {
         this.Codigo = Codigo;
         this.FechaIngreso = FechaIngreso;
         this.PrecioCompra = PrecioCompra;

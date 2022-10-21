@@ -122,7 +122,7 @@ public class GestionVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        IngresoUsuarios IngUsuarios = new IngresoUsuarios();
+        MenuPrincipal IngUsuarios = new MenuPrincipal();
         IngUsuarios.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -134,7 +134,9 @@ public class GestionVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    RastrearVenta RastrearVenta = new RastrearVenta();
+    RastrearVenta.setVisible(true);
+    this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

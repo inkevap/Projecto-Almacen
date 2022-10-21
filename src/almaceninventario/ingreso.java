@@ -107,7 +107,7 @@ public class ingreso extends javax.swing.JFrame {
 
     private void btnIngPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngPrincipalActionPerformed
         // TODO add your handling code here:
-        IngresoUsuarios IngUsuarios = new IngresoUsuarios();//cuando presionamos el boton de ingresar
+        MenuPrincipal IngUsuarios = new MenuPrincipal();//cuando presionamos el boton de ingresar
         IngUsuarios.setVisible(true);//nos mueve a la siguiente ventana
         this.setVisible(false);// y cierra la actual(la oculta)
         

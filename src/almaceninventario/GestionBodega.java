@@ -94,7 +94,7 @@ public class GestionBodega extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        IngresoUsuarios IngUsuarios = new IngresoUsuarios();
+        MenuPrincipal IngUsuarios = new MenuPrincipal();
         IngUsuarios.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

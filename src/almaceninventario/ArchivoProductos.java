@@ -35,23 +35,35 @@ public class ArchivoProductos {
             Scanner scanner = new Scanner(new File(Direccion));//leemos el fichero de nuestra DDBB(base de datos)
             while (scanner.hasNextLine()) {//verificamos que mientras tenga datos
                 scanner.nextLine();
+                String Codigo = scanner.nextLine();
+                String FechaIngreso = scanner.nextLine();
+                float PrecioCompra = Float.parseFloat(scanner.nextLine());
+                String EstadoProducto = scanner.nextLine();
+                float PrecioVenta = Float.parseFloat(scanner.nextLine());
+                String Nombre = scanner.nextLine();
+                String Descripcion = scanner.nextLine();
+                int Existencias = Integer.parseInt(scanner.nextLine());
+                String FechaUltimaMod = scanner.nextLine();
+
                 Producto Product = new Producto(//se cree un Producto con esos datos en el siguiente orden
-                        scanner.nextLine(),//Codigo
-                        scanner.nextLine(),//Fecha Ingreso
-                        Float.parseFloat(scanner.nextLine()),//PrecioCompra
-                        scanner.nextLine(),//EstadoProducto
-                        Float.parseFloat(scanner.nextLine()),//PrecioVenta
-                        scanner.nextLine(),//Nombre
-                        scanner.nextLine(),//Descripcion
-                        Integer.parseInt(scanner.nextLine()),//Existencias
-                        scanner.nextLine()//FechaUltimaMod
+                        Codigo,
+                        FechaIngreso,
+                        PrecioCompra,
+                        EstadoProducto,
+                        PrecioVenta,
+                        Nombre,
+                        Descripcion,
+                        Existencias,
+                        FechaUltimaMod
                 );
+
                 Productos.add(Product);//agregamos el usuario a nuestra base de datos en memoria
+
             }
             scanner.close();//cerramos el fichero
         } catch (Exception e) {//en caso de que falle va a guardar la informacion en un LOG y va a mostrar una ventana con el error que se dio
             Logger.getLogger(ArchivoProductos.class.getName()).log(Level.SEVERE, null, e);
-            JOptionPane.showMessageDialog(null,"La base de datos se encuentra dañada o esta vacia","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La base de datos se encuentra dañada o esta vacia", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return Productos;//en caso de que sea necesario devolvemos la base de datos en memoria.
     }
@@ -63,6 +75,7 @@ public class ArchivoProductos {
             PrintStream Archivo;//preparamos una variable para escribir en el fichero
             FileOutputStream temp = new FileOutputStream(Direccion, Anidar);//Convertimos el fichero a informacion que sea legible para el programa
             Archivo = new PrintStream(temp);//Luego cargamos esa referencia a memoria y estamos listos para escribir informacion en el archivo
+
             for (Producto producto : Productos) {//cada producto dentro de nuestra base de datos de productos
                 Archivo.println("---------------------------------------------");
                 Archivo.println(producto.Codigo);//va a estar guardando sus parametros en el orden que se muestra a continuacion
@@ -75,14 +88,15 @@ public class ArchivoProductos {
                 Archivo.println(producto.Existencias);
                 Archivo.println(producto.FechaUltimaMod);
             }
+
             Archivo.flush();//limpiamos la memoria de los ficheros que hemos cargado
             Archivo.close();//y cerramos el fichero y eliminamos la referencia del fichero
         } catch (FileNotFoundException e) {//en caso de que se presente algun problema este sera guardado en un log y de igual manera
             //se le notificara al usuario que hubo un error
             Logger.getLogger(ArchivoProductos.class.getName()).log(Level.SEVERE, null, e);
-            JOptionPane.showMessageDialog(null,"Hubo un Error al tratar de crear el producto","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Hubo un Error al tratar de crear el producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
         LeerProductos();//luego de haber escrito la informacion en el fichero refrescamos la base de datos en memoria para tener la informacion disponible.
     }
-    
+
 }

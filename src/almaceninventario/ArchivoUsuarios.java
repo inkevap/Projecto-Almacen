@@ -34,20 +34,28 @@ public class ArchivoUsuarios {
             Scanner scanner = new Scanner(new File(Direccion));//lo unico que cambia son los parametros
             while (scanner.hasNextLine()) {//los parametros aqui usado son los de usuarios
                 scanner.nextLine();
+                String Nombre = scanner.nextLine();
+                String Apellido = scanner.nextLine();
+                String NombreUsuario = scanner.nextLine();
+                String PwdUser = scanner.nextLine();
+                String TipoUsuario = scanner.nextLine();
+                String FechaCreacion = scanner.nextLine();
+
                 Usuario user = new Usuario(
-                        scanner.nextLine(),//Nombre
-                        scanner.nextLine(),//Apellido
-                        scanner.nextLine(),//NombreUsuario
-                        scanner.nextLine(),//PwdUser
-                        scanner.nextLine(),//TipoUsuario
-                        scanner.nextLine()//FechaCreacion
+                        Nombre,
+                        Apellido,
+                        PwdUser,
+                        TipoUsuario,
+                        TipoUsuario,
+                        FechaCreacion
                 );
+                
                 Usuarios.add(user);
             }
             scanner.close();
         } catch (Exception e) {
             Logger.getLogger(ArchivoUsuarios.class.getName()).log(Level.SEVERE, null, e);
-            JOptionPane.showMessageDialog(null,"La base de datos se encuentra dañada o esta vacia","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La base de datos se encuentra dañada o esta vacia", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return Usuarios;
     }
@@ -57,6 +65,7 @@ public class ArchivoUsuarios {
             PrintStream Archivo;
             FileOutputStream temp = new FileOutputStream(Direccion, true);
             Archivo = new PrintStream(temp);
+            
             for (Usuario usuario : Usuarios) {
                 Archivo.println("---------------------------------------------");
                 Archivo.println(usuario.Nombre);
@@ -65,12 +74,13 @@ public class ArchivoUsuarios {
                 Archivo.println(usuario.PwdUsuario);
                 Archivo.println(usuario.TipoUsuario);
                 Archivo.println(usuario.FechaCreacion);
+                
             }
             Archivo.flush();
             Archivo.close();
         } catch (FileNotFoundException e) {
             Logger.getLogger(ArchivoUsuarios.class.getName()).log(Level.SEVERE, null, e);
-            JOptionPane.showMessageDialog(null,"Hubo un Error al tratar de crear el usuario","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Hubo un Error al tratar de crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
         }
         LeerUsuarios();
     }

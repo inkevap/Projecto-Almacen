@@ -134,7 +134,7 @@ public class GestionProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        IngresoUsuarios IngUsuarios = new IngresoUsuarios();//cuando se presione el boton este va
+        MenuPrincipal IngUsuarios = new MenuPrincipal();//cuando se presione el boton este va
         IngUsuarios.setVisible(true);// hacia la ventana previa
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
