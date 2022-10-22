@@ -44,8 +44,8 @@ public class ArchivoUsuarios {
                 Usuario user = new Usuario(
                         Nombre,
                         Apellido,
+                        NombreUsuario,
                         PwdUser,
-                        TipoUsuario,
                         TipoUsuario,
                         FechaCreacion
                 );
